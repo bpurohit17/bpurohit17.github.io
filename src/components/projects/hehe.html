@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+        -webkit-scroll-behavior: smooth;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      .positioned {
+        position: absolute;
+        left: 50%;
+        color: white;
+        font-size: 3em;
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+      }
+      .positioned span {
+        font-size: 2ch;
+        color: transparent;
+        background-image: radial-gradient(
+          circle farthest-corner at -4.1% 49.8%,
+          rgba(247, 127, 127, 1) 0%,
+          rgba(255, 175, 90, 1) 20.8%,
+          rgba(151, 255, 114, 1) 43.8%,
+          rgba(149, 251, 255, 1) 65.2%,
+          rgba(147, 145, 255, 1) 84.3%,
+          rgba(255, 147, 248, 1) 100.2%
+        );
+        background-clip: text;
+        font-weight: 700;
+        display: block;
+        margin: 1rem 0 2rem 0;
+      }
+
+      .positioned i {
+        font-size: 2em;
+      }
+      #centered {
+        top: 10%;
+        transform: translate(-50%, 0);
+      }
+      #bottom {
+        transform: translate(-50%, -100%);
+      }
+      /* Progress bar style */
+      .progress {
+        background: rgba(131, 58, 180, 1);
+
+        /* linear-gradient(
+          to right,
+          rgba(131, 58, 180, 1) 0%,
+          rgba(253, 29, 29, 1) 50vw,
+          rgba(252, 176, 69, 1) 100vw
+        ); */
+        /* pre-set background gradient */
+        background-repeat: no-repeat;
+        position: fixed;
+        width: 0;
+        top: 0;
+        left: 0;
+        height: 0.3rem;
+        z-index: 1;
+      }
+
+      span.appear {
+        opacity: 0;
+
+        font-size: 0.8ch;
+        display: block;
+      }
+
+      @supports (
+        (animation-timeline: scroll()) and (animation-range: 0% 100%)
+      ) {
+        /* body::before {
+          position: fixed;
+          top: 0;
+          left: 0;
+          content: "This browser does support Animation-timeline and scroll-driven animations";
+          width: 300px;
+          margin: 0.5rem;
+          color: white;
+          font-family: "Quicksand";
+          font-size: 0.8rem;
+        } */
+        .progress {
+          animation: scroller 1s linear both;
+          animation-timeline: scroll(root block);
+        }
+        span.appear {
+          animation: appear 1s linear both;
+          animation-timeline: view();
+          animation-range: entry 0% exit -50vh;
+        }
+      }
+      body p {
+        display: block;
+        clear: both;
+        height: 30px;
+      }
+      body p:has(span) {
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+        font-size: 7.5ch;
+        font-weight: 700;
+      }
+
+      /* General styling */
+      body {
+        background-color: #3a3f45;
+        overflow-x: hidden;
+      }
+
+      /* ANIMATIONS */
+      @keyframes scroller {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100vw;
+        }
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateX(100vw) skew(20deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) skew(0);
+        }
+        /* to {opacity:1;transform;translateX(0) skew(0);} */
+      }
+
+      /* QUERIES */
+      @media (min-height: 650px) {
+        .positioned span {
+          font-size: 3.5ch;
+        }
+      }
+      @media (max-width: 599px) {
+        .positioned span {
+          font-size: 2.5rem;
+        }
+        body p:has(span) {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress"></div>
+
+    <div class="positioned" id="centered">
+      <span class="multicolor">MULTICOLOR SCROLL PROGRESS BAR</span>
+      SCROLL DOWN<br /><a href="#bottom"
+        ><i class="material-icons"> keyboard_arrow_down </i></a
+      >
+    </div>
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>Using CSS scroll-driven animations</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>We can vary the width of an element</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><</p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>Using the scroll() as animation trigger</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>with properties like animation-timeline: scroll()</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>in other instances...</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p>
+      <span class="appear"
+        >we can also use view() to interact with items out and in viewport</span
+      >
+    </p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>...So, we can make the progress bar grow</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p><span>As we scroll our way to the...</span></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <div class="positioned" id="bottom">
+      <a href="#centered"><i class="material-icons"> keyboard_arrow_up </i></a
+      ><br />Bottom of the page.
+    </div>
+  </body>
+</html>

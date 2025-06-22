@@ -1,5 +1,28 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* //////////////// */
 .App {
   text-align: center;
+  /* width: 100vw; */
+}
+
+::selection {
+  background: #f96353;
+  color: #ffffff;
+}
+
+.greeting::selection,
+.typing-text::selection {
+  background: #f96353;
+  color: #fff;
 }
 
 .App-logo {
@@ -32,7 +55,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.app {
+  background-color: white;
+  transition: background-color 1s ease, color 1s ease;
+  color: #2a363b;
+}
+
+/* Dark Mode */
+.app.dark {
+  background-color: #222831;
+  color: #00ADB5;
 }

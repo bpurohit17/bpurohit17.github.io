@@ -1,0 +1,141 @@
+* {
+  /* box-sizing: border-box; */
+  transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.left-bar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.left-bar li {
+  margin: 15px 0;
+}
+
+.right-bar .email {
+  color: #8892b0;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.left-bar a:hover,
+.right-bar .email:hover {
+  color: #64ffda;
+}
+
+.vertical-line {
+  display: block;
+  width: 1px;
+  height: 90px;
+  margin: 10px auto 0;
+}
+
+.left-bar {
+  position: fixed;
+  bottom: 0;
+  left: 2.5%;
+  z-index: 100;
+  color: #8892b0;
+}
+
+.right-bar {
+  position: fixed;
+  bottom: 0;
+  right: 2.5%;
+  z-index: 100;
+  color: #8892b0;
+}
+
+.email-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-90);
+  /* Flip for vertical-rl effect */
+}
+
+.email-container .email {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: #8892b0;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+  transform: rotate(180deg);
+  /* Re-rotate to keep text readable */
+}
+
+.email-container .email:hover {
+  color: #64ffda;
+}
+
+/* NAVBAR */
+
+.navbar {
+  position: fixed;
+  height: 90px;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 2 !important;
+  align-items: center;
+  /* padding: 1rem 2rem; */
+  overflow-x: clip;
+  padding-top: 5px;
+  box-shadow: none !important;
+
+  /* Frosted Glass Effect */
+  /* background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+  animation: fadeDown 0.5s ease-in-out;  
+  */
+
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+  /* transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.28); */
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 17px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* 
+.navbar a:hover {
+  color: #64ffda;
+  transform: translateY(-2px);
+}
+
+.navbar a.active {
+  border-bottom: 2px solid #64ffda;
+  padding-bottom: 2px;
+  color: #64ffda;
+} */

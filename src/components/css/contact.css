@@ -1,0 +1,71 @@
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+.txt {
+  color: #f1ce5f;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  /* padding-bottom: 20px; */
+  line-height: 1.5;
+  /* align-items: center;
+  text-align: center; */
+}
+
+.title {
+  color: #faebcd;
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0;
+  /* padding-bottom: 20px; */
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.container-contact {
+  /* margin: 130px 150px; */
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /*  */
+  padding: 100px 0 20px;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+}
+
+.contact_btn {
+  display: inline-table;
+
+  border-radius: 4px;
+  background-color: transparent;
+  border: 1px solid #f7c873;
+  color: #f7c873;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 1.25rem 1.75rem;
+  /* overflow: hidden; */
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  white-space: nowrap;
+  width: 6rem;
+  cursor: pointer;
+  margin-top: 50px;
+  /* margin-bottom: 16rem; */
+}
+
+.contact_btn:hover {
+  background-color: #f7c873;
+  color: #434343;
+  transform: scale(1.05);
+}
+
+.contact_git_section {
+  margin-top: 130px;
+  cursor: pointer;
+}
