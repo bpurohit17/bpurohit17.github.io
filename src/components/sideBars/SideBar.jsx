@@ -56,7 +56,6 @@ const SideBars = ({ color, scrollToSection }) => {
                 <a
                   href={`#${section}`}
                   className={activeSection === section ? "active" : ""}
-                  // style={{ color: iconColor }}
                 >
                   {section.charAt(0).toUpperCase() + section.slice(1)}
                 </a>
