@@ -65,6 +65,7 @@ const Projects = ({ setColor }) => {
             techStack="Flutter | Hybrid Mobile App | Android | iOS"
             imageUrl={process.env.PUBLIC_URL + "images/tgf-img.png"}
             featuredText="Featured Project"
+            link="https://devportfolio.biotradx.com/"
           />
         </div>
       </div>
