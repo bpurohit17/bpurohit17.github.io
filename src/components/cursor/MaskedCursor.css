@@ -20,7 +20,7 @@ body,
   position: fixed;
   top: 0;
   left: 0;
-  border: 1.4px solid #cf4647;
+  border: 1.4px solid #5F41B2;
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
@@ -45,7 +45,7 @@ body,
 .inner-circle {
   width: 5px;
   height: 5px;
-  background: #cf4647;
+  background: #5F41B2;
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -70,6 +70,7 @@ body,
 .outer-circle.hovered {
   opacity: 0;
 }
+
 /* .middle-circle.hovered {
   opacity: 0;
 } */

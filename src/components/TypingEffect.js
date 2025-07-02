@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-
 const TypingEffect = () => {
   const strings = [
     "A mobile app developer",
     "I build things for the app",
-    "A fullstack hybrid app developer"
+    "A fullstack hybrid app developer",
+    // "A fullstack web developer",
   ];
 
-  const scrambleChars = "<>!{}[]()*&^%$#@~"; 
+  const scrambleChars = "<>!{}[]()*&^%$#@~";
   const [displayText, setDisplayText] = useState("");
   const [step, setStep] = useState("typing");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,13 +31,15 @@ const TypingEffect = () => {
           setScrambleCount(0);
         }, 1000);
       }
-    }
-
-    else if (step === "scrambling") {
+    } else if (step === "scrambling") {
       if (scrambleCount < 10) {
-        const scrambled = currentString.split("").map(() =>
-          scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
-        ).join("");
+        const scrambled = currentString
+          .split("")
+          .map(
+            () =>
+              scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
+          )
+          .join("");
         timeout = setTimeout(() => {
           setDisplayText(scrambled);
           setScrambleCount(scrambleCount + 1);
@@ -48,17 +50,16 @@ const TypingEffect = () => {
           setCharIndex(0);
         }, 300);
       }
-    }
-
-    else if (step === "next") {
+    } else if (step === "next") {
       const nextString = strings[(currentIndex + 1) % strings.length];
       if (charIndex <= nextString.length) {
         const partial = nextString.slice(0, charIndex);
         const rest = nextString
           .slice(charIndex)
           .split("")
-          .map(() =>
-            scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
+          .map(
+            () =>
+              scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
           )
           .join("");
         timeout = setTimeout(() => {
@@ -76,8 +77,15 @@ const TypingEffect = () => {
   }, [step, charIndex, scrambleCount]);
 
   return (
-    
-    <div style={{ fontSize: "40px", lineHeight: "60px", fontWeight: "600", color: '#cf4647', paddingBottom: "20px"  }}>
+    <div
+      style={{
+        fontSize: "40px",
+        lineHeight: "60px",
+        fontWeight: "600",
+        color: "#5F41B2", // cf4647
+        paddingBottom: "20px",
+      }}
+    >
       {displayText}
     </div>
   );

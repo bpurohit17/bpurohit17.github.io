@@ -256,6 +256,7 @@ const Skills = ({ setColor }) => {
                       d="M90.5 18.2L75.7 3.5c-3.4-3.4-8-4.4-10.4-2.3L26.9 26.6h59.5l2.9.1c1.3 0 2.8.2 4.3.7l-3.1-9.2z"
                     />
                   </svg>
+                  <span class="sr-only">Dart</span>
                 </div>
               </div>
             </div>

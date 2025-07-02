@@ -5,7 +5,16 @@ import sectionColors from "../../constants/sectionColors";
 
 const SideBars = ({ color, scrollToSection }) => {
   const [activeSection, setActiveSection] = useState("");
-  const iconColor = sectionColors[activeSection] || "#2a363b";
+  const [isHovered, setIsHovered] = useState(false);
+
+  const defaultColor = sectionColors[activeSection]?.default || "#2a363b";
+  const hoverColor = sectionColors[activeSection]?.hover || defaultColor;
+  const defaultSectionColor = sectionColors[activeSection]?.defaultSectionColor;
+  const iconColor = isHovered ? hoverColor : defaultColor;
+  const [hoveredComponent, setHoveredComponent] = useState(null);
+
+  const getComponentColor = (componentName) =>
+    hoveredComponent === componentName ? hoverColor : defaultColor;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,24 +37,37 @@ const SideBars = ({ color, scrollToSection }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <nav className="navbar" style={{ "--hover-color": iconColor }}>
+      <nav
+        className="navbar"
+        style={{
+          "--icon-color": defaultColor,
+          "--hover-color": hoverColor,
+          "--defaultSectionColor": defaultSectionColor,
+        }}
+      >
         <style>
           {`
+          .navbar a {
+            color: var(--defaultSectionColor);
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+          }
+
           .navbar a:hover {
             color: var(--hover-color);
             transform: translateY(-2px);
           }
 
           .navbar a.active {
-            border-bottom: 2px solid var(--hover-color); 
+            border-bottom: 2px solid var(--icon-color); 
             padding-bottom: 2px;
-            color: var(--hover-color); 
+            color: var(--icon-color); 
           }`}
         </style>
 
@@ -73,6 +95,9 @@ const SideBars = ({ color, scrollToSection }) => {
               rel="noreferrer"
               target="_blank"
               href="https://github.com/bpurohit17"
+
+              // onMouseEnter={() => setIsHovered(true)}
+              // onMouseLeave={() => setIsHovered(false)}
             >
               <Github
                 color={iconColor}
@@ -87,6 +112,8 @@ const SideBars = ({ color, scrollToSection }) => {
               rel="noreferrer"
               target="_blank"
               href="https://www.instagram.com/"
+              // onMouseEnter={() => setIsHovered(true)}
+              // onMouseLeave={() => setIsHovered(false)}
             >
               <Instagram
                 color={iconColor}
@@ -101,6 +128,8 @@ const SideBars = ({ color, scrollToSection }) => {
               rel="noreferrer"
               target="_blank"
               href="https://www.linkedin.com/in/bpurohit17/"
+              // onMouseEnter={() => setIsHovered(true)}
+              // onMouseLeave={() => setIsHovered(false)}
             >
               <Linkedin
                 color={iconColor}
@@ -125,7 +154,10 @@ const SideBars = ({ color, scrollToSection }) => {
             </a>
           </li>
         </ul>
-        <div className="vertical-line" style={{ backgroundColor: iconColor }} />
+        <div
+          className="vertical-line"
+          style={{ backgroundColor: defaultColor }}
+        />
       </div>
 
       {/* Right Email Text */}
@@ -143,13 +175,15 @@ const SideBars = ({ color, scrollToSection }) => {
               className="email"
               href="mailto:bhagyashrip830@gmail.com"
               style={{ color: iconColor }}
+              // onMouseEnter={() => setIsHovered(true)}
+              // onMouseLeave={() => setIsHovered(false)}
             >
               bhagyashrip830@gmail.com
             </a>
           </div>
           <div
             className="vertical-line"
-            style={{ backgroundColor: iconColor }}
+            style={{ backgroundColor: defaultColor }}
           />
         </div>
       </div>

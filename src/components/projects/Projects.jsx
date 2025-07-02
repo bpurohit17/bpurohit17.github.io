@@ -3,7 +3,6 @@ import MediaQuery from "react-responsive";
 import "./projects.css";
 import ProjectItem from "./projectItem";
 import { useInView } from "react-intersection-observer";
-import bulko from "./bulko-img.png";
 
 const Projects = ({ setColor }) => {
   const { ref, inView } = useInView({ threshold: 0.5 });
@@ -41,27 +40,30 @@ const Projects = ({ setColor }) => {
             imageUrl={process.env.PUBLIC_URL + "images/bulko-img.png"}
             featuredText="Featured Project"
             flipData={true}
+            link="https://bulko.in/"
           />
           <ProjectItem
-            title="Bulko App"
-            description="Bulko is a modern grocery delivery app that brings fresh produce, pantry staples, and household items directly to customers' doors. It features a user-friendly interface, secure authentication, smart search, seamless cart management, and real-time order tracking — all designed to make grocery shopping fast and convenient."
-            techStack="Flutter | Hybrid Mobile App | Android | iOS"
-            imageUrl={process.env.PUBLIC_URL + "images/bulko-img.png"}
-            featuredText="Featured Project"
-          />
-          <ProjectItem
-            title="Bulko App"
-            description="Bulko is a modern grocery delivery app that brings fresh produce, pantry staples, and household items directly to customers' doors. It features a user-friendly interface, secure authentication, smart search, seamless cart management, and real-time order tracking — all designed to make grocery shopping fast and convenient."
-            techStack="Flutter | Hybrid Mobile App | Android | iOS"
-            imageUrl={process.env.PUBLIC_URL + "images/bulko-img.png"}
-            featuredText="Featured Project"
-            flipData={true}
-          />{" "}
-          <ProjectItem
-            title="Green Force"
+            title="Green Force App"
             description="Green Force is platform that connects solar companies and independent surveyors. It provides a tech-enabled service to facilitate solar site surveys, which are essential for evaluating rooftop or ground-mounted solar panel installations."
             techStack="Flutter | Hybrid Mobile App | Android | iOS"
-            imageUrl={process.env.PUBLIC_URL + "images/bulko-img.png"}
+            imageUrl={process.env.PUBLIC_URL + "images/tgf-img.png"}
+            featuredText="Featured Project"
+            link="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
+          />
+          <ProjectItem
+            title="Planset Project"
+            description="Bulko is a modern grocery delivery app that brings fresh produce, pantry staples, and household items directly to customers' doors. It features a user-friendly interface, secure authentication, smart search, seamless cart management, and real-time order tracking — all designed to make grocery shopping fast and convenient."
+            techStack="React Js | Web App | Rest API | SQL"
+            imageUrl={process.env.PUBLIC_URL + "images/planset-img.png"}
+            featuredText="Featured Project"
+            flipData={true}
+            link="https://planset.gwrepermit.com/"
+          />
+          <ProjectItem
+            title="BioTradX"
+            description="Green Force is platform that connects solar companies and independent surveyors. It provides a tech-enabled service to facilitate solar site surveys, which are essential for evaluating rooftop or ground-mounted solar panel installations."
+            techStack="Flutter | Hybrid Mobile App | Android | iOS"
+            imageUrl={process.env.PUBLIC_URL + "images/tgf-img.png"}
             featuredText="Featured Project"
           />
         </div>

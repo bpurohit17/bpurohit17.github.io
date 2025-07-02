@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import MediaQuery from "react-responsive";
 import "./ProjectItem.css";
+import { ArrowUpRight } from "@geist-ui/react-icons";
 
 const ProjectItem = ({
   title,
+  link,
   description,
   techStack,
   imageUrl,
@@ -44,12 +46,15 @@ const ProjectItem = ({
             {featuredText}
           </div>
           <div
-            class="projects-text-title"
+            class="projects-text-title flex flex-row"
             style={{
               transform: flipData ? "scaleX(-1)" : "none",
             }}
           >
-            {title}
+            <a href={link} target="_blank">
+              {title}
+              {/* <ArrowUpRight size={16} style={{ marginLeft: "8px" }} /> */}
+            </a>
           </div>
 
           <div
@@ -71,6 +76,7 @@ const ProjectItem = ({
         </div>
       </div>
     </div>
+    // {/* </a> */}
   );
 };
 
