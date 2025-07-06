@@ -31,7 +31,14 @@ const Contact = ({ setColor }) => {
               you!.
             </div>
           </div>
-          <div class="contact_btn">Say Hello</div>
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="mailto:bhagyashrip830@gmail.com"
+          >
+            <div class="contact_btn">Say Hello</div>{" "}
+          </a>
+
           <div class="contact_git_section"></div>
         </div>
       </div>

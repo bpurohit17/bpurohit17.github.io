@@ -111,7 +111,7 @@ const SideBars = ({ color, scrollToSection }) => {
             <a
               rel="noreferrer"
               target="_blank"
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/bpurohit17"
               // onMouseEnter={() => setIsHovered(true)}
               // onMouseLeave={() => setIsHovered(false)}
             >
@@ -143,7 +143,7 @@ const SideBars = ({ color, scrollToSection }) => {
             <a
               rel="noreferrer"
               target="_blank"
-              href="https://www.instagram.com/"
+              href="mailto:bhagyashrip830@gmail.com"
             >
               <Mail
                 color={iconColor}
