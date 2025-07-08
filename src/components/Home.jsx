@@ -41,7 +41,15 @@ const Home = ({ setColor, scrollToSection }) => {
               I build fast, scalable, and user-focused apps—from backend logic
               to pixel-perfect frontends. Let's code something amazing.
             </div>
-            <div className="btn">Contact me!</div>
+            <div className="btn">
+              <a
+                href="https://drive.google.com/file/d/109v2OjFRT6-19LTtH1Vml-F9tTXAcrdI/view?usp=sharing"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Download Resume
+              </a>
+            </div>
             <div></div>
           </div>
         </div>

@@ -7,7 +7,7 @@ const MaskedCursor = () => {
   // const middleRef = useRef(null);
   const innerRef = useRef(null);
 
-  const [cursorColor, setCursorColor] = useState("#5F41B2");
+  const [cursorColor, setCursorColor] = useState("#cf4647");
   useEffect(() => {
     const outer = outerRef.current;
     // const middle = middleRef.current;

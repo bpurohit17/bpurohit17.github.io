@@ -42,6 +42,8 @@ const Projects = ({ setColor }) => {
             featuredText="Featured Project"
             flipData={true}
             link="https://bulko.in/"
+            // gitLink="https://github.com/look-at-clay/bulko-user-app"
+            playstoreLink="https://play.google.com/store/apps/details?id=com.lookatclay.bulko.user&pli=1"
           />
           <ProjectItem
             title="Green Force App"
@@ -51,6 +53,9 @@ const Projects = ({ setColor }) => {
             imageUrl={`${process.env.PUBLIC_URL}/images/tgf-img.png`}
             featuredText="Featured Project"
             link="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
+            // gitLink="https://github.com/look-at-clay/bulko-user-app"
+            playstoreLink="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
+            appStoreLink="https://apps.apple.com/in/developer/team-green-force-inc/id1719754974"
           />
           <ProjectItem
             title="Permit Planset Project"
@@ -61,16 +66,18 @@ const Projects = ({ setColor }) => {
             featuredText="Featured Project"
             flipData={true}
             link="https://software.gwrepermit.com/"
-            // link="https://planset.gwrepermit.com/"
+            // gitLink="https://github.com/look-at-clay/bulko-user-app"
           />
           <ProjectItem
             title="BioTradX"
-            description="Green Force is platform that connects solar companies and independent surveyors. It provides a tech-enabled service to facilitate solar site surveys, which are essential for evaluating rooftop or ground-mounted solar panel installations."
+            description="This project is currently in progress. It aims to solve a real-world problem through innovative design and technology. More details will be added soon as development progresses."
             techStack="Flutter | Hybrid Mobile App | Android | iOS"
-            // imageUrl={process.env.PUBLIC_URL + "images/tgf-img.png"}
-            imageUrl={`${process.env.PUBLIC_URL}/images/tgf-img.png`}
+            imageUrl={`${process.env.PUBLIC_URL}/images/biotradx-img.png`}
             featuredText="Featured Project"
             link="https://devportfolio.biotradx.com/"
+            // gitLink="https://github.com/look-at-clay/bulko-user-app"
+            // playstoreLink="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
+            // appStoreLink="https://apps.apple.com/in/developer/team-green-force-inc/id1719754974"
           />
         </div>
       </div>

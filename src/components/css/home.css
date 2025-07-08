@@ -28,8 +28,8 @@ body {
   display: inline;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid #5F41B2;
-  color: #5F41B2;
+  border: 1px solid #cf4647;
+  color: #cf4647;
   font-size: 14px;
   font-weight: 600;
   padding: 1.25rem 1.75rem;
@@ -40,10 +40,11 @@ body {
   cursor: pointer;
   margin-top: 30px;
   margin-bottom: 2.5rem;
+
 }
 
 .btn:hover {
-  background-color: #5F41B2;
+  background-color: #cf4647;
   color: #f1ce5f;
   transform: scale(1.05);
 }

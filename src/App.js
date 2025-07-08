@@ -66,8 +66,8 @@ function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
           onClick={scrollToTop}
           style={{
             position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
+            bottom: "1.5rem",
+            right: "3.5rem",
             backgroundColor: "#ffffff",
             border: "none",
             borderRadius: "50%",
@@ -146,6 +146,26 @@ function App() {
         <Skills setColor={setColor} />
         <WorkExperiences setColor={setColor} />
         <Contact setColor={setColor} />
+        <div
+          style={{
+            backgroundColor: "#434343",
+            textAlign: "center",
+            paddingBottom: "10px",
+            fontFamily: "'Space Mono', monospace",
+            color: "white",
+            fontSize: "12px",
+          }}
+        >
+          Design inspired by{" "}
+          <a
+            href="https://www.muhammadaamirmalik.com/"
+            rel="noreferrer"
+            target="_blank"
+            style={{ color: "#f1ce5f" }}
+          >
+            Muhammad Aamir's Portfolio
+          </a>
+        </div>
         <ScrollProgressAndArrow progressColor={iconColor} />
         <MaskedCursor />
       </>

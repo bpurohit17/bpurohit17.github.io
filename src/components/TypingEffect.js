@@ -82,7 +82,7 @@ const TypingEffect = () => {
         fontSize: "40px",
         lineHeight: "60px",
         fontWeight: "600",
-        color: "#5F41B2", // cf4647
+        color: "#cf4647", // cf4647 5F41B2
         paddingBottom: "20px",
       }}
     >

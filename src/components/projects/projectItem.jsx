@@ -2,10 +2,15 @@ import React, { useEffect } from "react";
 import MediaQuery from "react-responsive";
 import "./ProjectItem.css";
 import { ArrowUpRight } from "@geist-ui/react-icons";
+import { Github, ExternalLink } from "@geist-ui/react-icons";
+import { FaGooglePlay, FaAppStore } from "react-icons/fa";
 
 const ProjectItem = ({
   title,
   link,
+  gitLink,
+  playstoreLink,
+  appStoreLink,
   description,
   techStack,
   imageUrl,
@@ -69,9 +74,56 @@ const ProjectItem = ({
             class="projects-text-tech"
             style={{
               transform: flipData ? "scaleX(-1)" : "none",
+              paddingBottom: "4px",
             }}
           >
             {techStack}
+          </div>
+          <div
+            class="flex flex-row gap-4 pt-4"
+            style={{
+              transform: flipData ? "scaleX(-1)" : "none",
+            }}
+          >
+            {gitLink && (
+              <a rel="noreferrer" target="_blank" href={gitLink}>
+                <Github
+                  color="white"
+                  className="mb-6"
+                  strokeWidth={2}
+                  size={20}
+                />
+              </a>
+            )}
+
+            <a rel="noreferrer" target="_blank" href={link}>
+              <ExternalLink
+                color="white"
+                className="mb-6"
+                strokeWidth={2}
+                size={20}
+              />
+            </a>
+            {playstoreLink && (
+              <a rel="noreferrer" target="_blank" href={playstoreLink}>
+                <FaGooglePlay
+                  color="white"
+                  className="mb-6"
+                  strokeWidth={2}
+                  size={18}
+                />
+              </a>
+            )}
+            {appStoreLink && (
+              <a rel="noreferrer" target="_blank" href={appStoreLink}>
+                <FaAppStore
+                  color="white"
+                  className="mb-6"
+                  strokeWidth={2}
+                  size={20}
+                />
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import MediaQuery from "react-responsive";
 import "./css/contact.css";
 import { useInView } from "react-intersection-observer";
-
 // const Contact = ({ setCurrActive }) => {
 const Contact = ({ setColor }) => {
   //   useEffect(() => {

@@ -71,20 +71,28 @@ const SideBars = ({ color, scrollToSection }) => {
           }`}
         </style>
 
-        <ul>
-          {["home", "projects", "skills", "experience", "contact"].map(
-            (section) => (
-              <li key={section}>
-                <a
-                  href={`#${section}`}
-                  className={activeSection === section ? "active" : ""}
-                >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
-                </a>
-              </li>
-            )
-          )}
-        </ul>
+        {/* <div class="flex flex-row text-center"> */}
+        <div>
+          {/* <img
+            src={`${process.env.PUBLIC_URL}/images/photo.jpeg`}
+            style={{ borderRadius: "50%", height: "80px" }}
+          /> */}
+
+          <ul>
+            {["home", "projects", "skills", "experience", "contact"].map(
+              (section) => (
+                <li key={section}>
+                  <a
+                    href={`#${section}`}
+                    className={activeSection === section ? "active" : ""}
+                  >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </a>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
       </nav>
 
       {/* Left Social Icons */}
@@ -107,7 +115,7 @@ const SideBars = ({ color, scrollToSection }) => {
               />
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               rel="noreferrer"
               target="_blank"
@@ -122,7 +130,7 @@ const SideBars = ({ color, scrollToSection }) => {
                 size={20}
               />
             </a>
-          </li>
+          </li> */}
           <li>
             <a
               rel="noreferrer"
