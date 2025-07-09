@@ -7,7 +7,6 @@ import MediaQuery from "react-responsive";
 import Loading from "./components/preloader/Loading";
 import logo from "./logo.svg";
 import "./App.css";
-// import Home from "./components/Home";
 import Home from "./components/home/Home.jsx";
 import Contact from "./components/contacts/contact";
 import NavBar from "./components/navBar/NavBar.js";
@@ -18,6 +17,7 @@ import "./components/css/ScrollProgress.css";
 import { ArrowUp } from "@geist-ui/react-icons";
 import sectionColors from "./constants/sectionColors.js";
 
+/*
 function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
   const [showArrow, setShowArrow] = useState(false);
   useEffect(() => {
@@ -46,6 +46,64 @@ function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
   return (
     <>
       <div className="progress" />
+      {showArrow && (
+        <button
+          onClick={scrollToTop}
+          style={{
+            position: "fixed",
+            bottom: "1.5rem",
+            right: "3.5rem",
+            backgroundColor: "#ffffff",
+            border: "none",
+            borderRadius: "50%",
+            padding: "0.6rem",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+            cursor: "pointer",
+            zIndex: 1000,
+          }}
+        >
+          <ArrowUp style={{ fontSize: "2rem", color: "#3a3f45" }} />
+        </button>
+      )}
+    </>
+  );
+}
+*/
+
+function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
+  const [showArrow, setShowArrow] = useState(false);
+  const progressRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY;
+      const progress =
+        (scrolled / (document.body.scrollHeight - window.innerHeight)) * 100;
+
+      if (progressRef.current) {
+        progressRef.current.style.width = `${progress}vw`;
+        progressRef.current.style.backgroundColor = progressColor;
+      }
+
+      setShowArrow(scrolled > 300);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    // Fire once on mount
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [progressColor]);
+
+  const scrollToTop = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+  return (
+    <>
+      <div className="progress" ref={progressRef} />
       {showArrow && (
         <button
           onClick={scrollToTop}
