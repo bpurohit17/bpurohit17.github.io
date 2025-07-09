@@ -11,6 +11,14 @@ body {
   padding: 100px 0 20px;
 }
 
+.bp-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: -webkit-fill-available;
+  padding: 0 260px;
+}
+
 .title-container {
   display: flex;
   align-items: center;
@@ -45,6 +53,14 @@ body {
   .container-projects {
     padding: 60px 16px 20px;
     text-align: left;
+
+  }
+
+  .bp-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
   }
 
   .title-container {
@@ -56,16 +72,17 @@ body {
 
   .title-text {
     font-size: 28px;
-    /* color: #393E46; */
     line-height: 32px;
     margin-right: 0;
     margin-bottom: 12px;
     /* white-space: normal; */
     margin-left: 0;
+    white-space: normal;
+    text-align: left;
   }
 
   .title-line-container {
-    width: 100%;
+    display: none;
   }
 
   .title-line {

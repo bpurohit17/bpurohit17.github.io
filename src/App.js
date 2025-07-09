@@ -129,6 +129,7 @@ function App() {
         <Home setColor={setColor} />
         <Projects setColor={setColor} />
         <Skills setColor={setColor} />
+
         <WorkExperiences setColor={setColor} />
         <Contact setColor={setColor} />
         <div

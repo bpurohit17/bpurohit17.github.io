@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import MediaQuery from "react-responsive";
 import "./projects.css";
 import ProjectItem from "./projectItem";
+import SliderBlogCard from "./SliderBlogCard";
 import { useInView } from "react-intersection-observer";
 
 const Projects = ({ setColor }) => {
@@ -16,15 +17,17 @@ const Projects = ({ setColor }) => {
   return (
     <section id="projects" ref={ref}>
       <div style={{}}>
+        {/* <SliderBlogCard /> */}
         <div className="container-projects">
           <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              width: "-webkit-fill-available",
-              padding: "0 260px",
-            }}
+            className="bp-container"
+            // style={{
+            //   display: "flex",
+            //   flexDirection: "row",
+            //   alignItems: "center",
+            //   width: "-webkit-fill-available",
+            //   padding: "0 260px",
+            // }}
           >
             <div className="title-text">
               Things I've Worked on, Some of Them

@@ -108,7 +108,8 @@ body {
     font-size: 1.5rem;
   }
 
-  .side-bar {
+  .side-bar,
+  .left-bar {
     display: none;
     /* Hide sidebar on mobile, unless you make it a hamburger menu */
   }
