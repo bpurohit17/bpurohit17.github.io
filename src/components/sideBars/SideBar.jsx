@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Github, Instagram, Linkedin, Mail } from "@geist-ui/react-icons";
 import "./SideBar.css";
 import sectionColors from "../../constants/sectionColors";
+import { debounce } from "lodash";
 
 const SideBars = ({ color, scrollToSection }) => {
   const [activeSection, setActiveSection] = useState("");
@@ -16,28 +17,53 @@ const SideBars = ({ color, scrollToSection }) => {
   const getComponentColor = (componentName) =>
     hoveredComponent === componentName ? hoverColor : defaultColor;
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const sections = ["home", "projects", "skills", "experience", "contact"];
+  //     let current = "";
+  //     const middle = window.innerHeight / 2;
+  //     sections.forEach((section) => {
+  //       const element = document.getElementById(section);
+  //       if (element) {
+  //         const rect = element.getBoundingClientRect();
+  //         if (rect.top <= 80 && rect.bottom >= 0) {
+  //           current = section;
+  //         }
+  //         if (rect.top <= middle && rect.bottom >= middle) {
+  //           current = section;
+  //         }
+  //       }
+  //     });
+  //     setActiveSection(current);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+  //   handleScroll();
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       const sections = ["home", "projects", "skills", "experience", "contact"];
-      let current = "";
       const middle = window.innerHeight / 2;
+      let current = "";
+
       sections.forEach((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 80 && rect.bottom >= 0) {
-            current = section;
-          }
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
           if (rect.top <= middle && rect.bottom >= middle) {
             current = section;
           }
         }
       });
+
       setActiveSection(current);
-    };
+    }, 100); // Adjust debounce delay as needed
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

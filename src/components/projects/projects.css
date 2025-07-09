@@ -11,13 +11,11 @@ body {
   padding: 100px 0 20px;
 }
 
-/* Fixed title container with proper flexbox alignment */
 .title-container {
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  /* Adjust based on your layout needs */
   margin-bottom: 30px;
 }
 
@@ -27,14 +25,11 @@ body {
   font-weight: 700;
   color: #EEEEEE;
   white-space: nowrap;
-  /* Prevents text wrapping */
   margin-right: 20px;
-  /* Space between text and line */
 }
 
 .title-line-container {
   flex: 1;
-  /* Takes up remaining space */
   display: flex;
   align-items: center;
 }
@@ -43,69 +38,37 @@ body {
   height: 2px;
   background-color: #393E46;
   width: 100%;
-  /* Full width of container */
   flex: 1;
 }
 
-/*body {
-  font-family: "Quicksand", sans-serif;
+@media only screen and (max-width: 768px) {
+  .container-projects {
+    padding: 60px 16px 20px;
+    text-align: left;
+  }
+
+  .title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .title-text {
+    font-size: 28px;
+    /* color: #393E46; */
+    line-height: 32px;
+    margin-right: 0;
+    margin-bottom: 12px;
+    /* white-space: normal; */
+    margin-left: 0;
+  }
+
+  .title-line-container {
+    width: 100%;
+  }
+
+  .title-line {
+    height: 1px;
+  }
 }
-
-.container-projects {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  padding: 100px 0 20px;
-  align-items: center;
-  text-align: center;
-  align-content: center;
-}
-
-body {
-  font-family: "Quicksand", sans-serif;
-}
-
-.container-projects {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 100px 0 20px;
-}
- .title-text {
-  font-size: clamp(24px, 8vw, 40px);
-  line-height: 40px;
-  font-weight: 700;
-  color: #EEEEEE;
-  flex: 0 0 auto;
-  margin-right: 10px;
-  display: flex;
-  flex-direction: row;
-}
-
-.title-text:after {
-  content: "";
-  flex: 1 1;
-  border-bottom: 2px solid #000;
-  margin: auto;
-}
-
-.title-line-container {
-  width: 100%;
-  margin-top: 10px;
-
-  flex: 1;
-  display: flex;
-  align-items: center;
-
-}
-
-.title-line {
-  height: 2px;
-  background-color: #393E46;
-  width: 90%;
-} */

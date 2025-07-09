@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./TypingEffect.css";
 
 const TypingEffect = () => {
   const strings = [
@@ -78,13 +79,14 @@ const TypingEffect = () => {
 
   return (
     <div
-      style={{
-        fontSize: "40px",
-        lineHeight: "60px",
-        fontWeight: "600",
-        color: "#cf4647", // cf4647 5F41B2
-        paddingBottom: "20px",
-      }}
+      className="typing-text"
+      // style={{
+      //   fontSize: "40px",
+      //   lineHeight: "60px",
+      //   fontWeight: "600",
+      //   color: "#cf4647", // cf4647 5F41B2
+      //   paddingBottom: "20px",
+      // }}
     >
       {displayText}
     </div>

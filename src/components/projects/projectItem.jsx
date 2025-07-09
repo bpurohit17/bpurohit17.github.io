@@ -128,7 +128,6 @@ const ProjectItem = ({
         </div>
       </div>
     </div>
-    // {/* </a> */}
   );
 };
 

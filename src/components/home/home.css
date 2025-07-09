@@ -48,3 +48,30 @@ body {
   color: #f1ce5f;
   transform: scale(1.05);
 }
+
+
+@media (max-width: 768px) {
+  .home-container {
+    margin: 60px 20px;
+    text-align: start;
+  }
+
+  .greeting {
+    font-size: 40px;
+    padding-top: 4rem;
+  }
+
+  .desc {
+    font-size: 16px;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    width: auto;
+    font-size: 13px;
+    padding: 1rem 1.5rem;
+  }
+
+
+}

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import "./css/home.css";
+import "../home/home.css";
 import MediaQuery from "react-responsive";
 // import Global from './Globalstyles';
-import TypingEffect from "./../components/TypingEffect";
+import TypingEffect from "./TypingEffect";
 // import Contact from "./contact";
 // import WorkExperiences from "./workExperience/WorkExperiences";
 import { useInView } from "react-intersection-observer";
@@ -17,11 +17,6 @@ const Home = ({ setColor, scrollToSection }) => {
       setColor("#ffffff");
     }
   }, [inView, setColor]);
-
-  //({ setCurrActive, bgColor })
-  // useEffect(() => {
-  //   setCurrActive("home");
-  // }, [setCurrActive]);
 
   return (
     <section id="home" ref={ref}>

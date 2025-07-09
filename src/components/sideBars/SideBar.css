@@ -54,7 +54,6 @@
   flex-direction: column;
   align-items: center;
   transform: rotate(-90);
-  /* Flip for vertical-rl effect */
 }
 
 .email-container .email {
@@ -65,7 +64,6 @@
   font-size: 18px;
   transition: color 0.3s ease;
   transform: rotate(180deg);
-  /* Re-rotate to keep text readable */
 }
 
 .email-container .email:hover {
@@ -83,23 +81,12 @@
   justify-content: center;
   z-index: 2 !important;
   align-items: center;
-  /* padding: 1rem 2rem; */
   overflow-x: clip;
   padding-top: 5px;
   box-shadow: none !important;
-
-  /* Frosted Glass Effect */
-  /* background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
-  animation: fadeDown 0.5s ease-in-out;  
-  */
-
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(3px) !important;
   -webkit-backdrop-filter: blur(3px) !important;
-  /* transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.28); */
 }
 
 @keyframes fadeDown {
@@ -129,14 +116,3 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* 
-.navbar a:hover {
-  color: #64ffda;
-  transform: translateY(-2px);
-}
-
-.navbar a.active {
-  border-bottom: 2px solid #64ffda;
-  padding-bottom: 2px;
-  color: #64ffda;
-} */

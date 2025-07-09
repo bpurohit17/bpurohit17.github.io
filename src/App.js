@@ -7,8 +7,9 @@ import MediaQuery from "react-responsive";
 import Loading from "./components/preloader/Loading";
 import logo from "./logo.svg";
 import "./App.css";
-import Home from "./components/Home";
-import Contact from "./components/contact";
+// import Home from "./components/Home";
+import Home from "./components/home/Home.jsx";
+import Contact from "./components/contacts/contact";
 import NavBar from "./components/navBar/NavBar.js";
 import WorkExperiences from "./components/workExperience/WorkExperiences";
 import Projects from "./components/projects/Projects.jsx";
@@ -16,22 +17,6 @@ import Skills from "./components/skills/Skills.jsx";
 import "./components/css/ScrollProgress.css";
 import { ArrowUp } from "@geist-ui/react-icons";
 import sectionColors from "./constants/sectionColors.js";
-
-// const Section = ({ theme, children, innerRef }) => (
-//   <section ref={innerRef} data-theme={theme} className="section">
-//     <AnimatePresence mode="wait">
-//       <motion.div
-//         key={theme}
-//         initial={{ opacity: 0, y: 40 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         exit={{ opacity: 0, y: -40 }}
-//         transition={{ duration: 0.6 }}
-//       >
-//         {children}
-//       </motion.div>
-//     </AnimatePresence>
-//   </section>
-// );
 
 function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
   const [showArrow, setShowArrow] = useState(false);
@@ -138,7 +123,7 @@ function App() {
   }, []);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={darkMode ? "app_dark" : "app"}>
       <>
         <SideBars setColor={setColor} />
         <Home setColor={setColor} />
