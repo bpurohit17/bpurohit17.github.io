@@ -13,6 +13,11 @@ const SideBars = ({ color, scrollToSection }) => {
   const defaultSectionColor = sectionColors[activeSection]?.defaultSectionColor;
   const iconColor = isHovered ? hoverColor : defaultColor;
   const [hoveredComponent, setHoveredComponent] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const getComponentColor = (componentName) =>
     hoveredComponent === componentName ? hoverColor : defaultColor;
@@ -69,7 +74,7 @@ const SideBars = ({ color, scrollToSection }) => {
 
   return (
     <>
-      <nav
+      {/* <nav
         className="navbar"
         style={{
           "--icon-color": defaultColor,
@@ -97,14 +102,28 @@ const SideBars = ({ color, scrollToSection }) => {
           }`}
         </style>
 
-        {/* <div class="flex flex-row text-center"> */}
         <div>
-          {/* <img
-            src={`${process.env.PUBLIC_URL}/images/photo.jpeg`}
-            style={{ borderRadius: "50%", height: "80px" }}
-          /> */}
-
-          <ul>
+          <div className="menu-toggle" onClick={toggleMobileMenu}>
+            <div
+              className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}
+            ></div>
+          </div>
+          <ul className={`menu ${isMobileMenuOpen ? "menu-open" : ""}`}>
+            {["home", "projects", "skills", "experience", "contact"].map(
+              (section) => (
+                <li key={section}>
+                  <a
+                    href={`#${section}`}
+                    className={activeSection === section ? "active" : ""}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </a>
+                </li>
+              )
+            )}
+          </ul> */}
+      {/* <ul>
             {["home", "projects", "skills", "experience", "contact"].map(
               (section) => (
                 <li key={section}>
@@ -117,9 +136,9 @@ const SideBars = ({ color, scrollToSection }) => {
                 </li>
               )
             )}
-          </ul>
-        </div>
-      </nav>
+          </ul> */}
+      {/* </div>
+      </nav> */}
 
       {/* Left Social Icons */}
       <div className="left-bar">

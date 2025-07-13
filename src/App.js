@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useSpring } from "framer-motion";
 import SideBars from "./components/sideBars/SideBar.jsx";
+import Navbar from "./components/sideBars/NavBar.js";
 import MaskedCursor from "./components/cursor/MaskedCursor.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MediaQuery from "react-responsive";
@@ -183,6 +184,7 @@ function App() {
   return (
     <div className={darkMode ? "app_dark" : "app"}>
       <>
+        <Navbar />
         <SideBars setColor={setColor} />
         <Home setColor={setColor} />
         <Projects setColor={setColor} />
