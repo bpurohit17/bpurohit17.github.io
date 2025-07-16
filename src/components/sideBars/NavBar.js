@@ -1,111 +1,54 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState } from "react";
+// import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+// const Navbar = () => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const navLinks = ["home", "projects", "skills", "experience", "contact"];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+//   const handleLinkClick = () => {
+//     setMenuOpen(false); // close menu on item click
+//   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  return (
-    // <nav className="fixed top-0 left-0 w-full z-50 bg-transparent p-4">
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 
-                         ${
-                           scrolled
-                             ? "bg-gradient-to-r from-gradientStartFrom via-gradientMiddle to-gradientEndTo shadow-md"
-                             : "bg-transparent"
-                         } p-4`}
-    >
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Hamburger Menu for Mobile */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-textPrimary focus:outline-none md:hidden"
-        >
-          {isOpen ? (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          )}
-        </button>
+//   return (
+//     <nav className="fixed top-0 left-0 w-full bg-white shadow z-50">
+//       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+//         <div className="text-xl font-bold text-gray-800">Bhagyashri</div>
 
-        {/* Navigation Links */}
-        <div
-          className={`w-full md:flex md:items-center md:w-auto 
-                    md:space-x-4 absolute md:relative top-16 left-0 md:top-0 
-                    md:left-0 p-4 md:p-0 bg-black bg-opacity-70 md:bg-transparent 
-                    transition-all duration-500 ease-in-out transform ${
-                      isOpen ? "translate-x-0" : "translate-x-full"
-                    } md:translate-x-0`}
-        >
-          <a
-            href="#home"
-            className="block py-2 px-4 text-textPrimary hover:text-gray-200 md:inline-block"
-          >
-            Home
-          </a>
-          <a
-            href="#about"
-            className="block py-2 px-4 text-textPrimary hover:text-gray-200 md:inline-block"
-          >
-            About
-          </a>
-          <a
-            href="#services"
-            className="block py-2 px-4 text-textPrimary hover:text-gray-200 md:inline-block"
-          >
-            Services
-          </a>
-          <a
-            href="#projects"
-            className="block py-2 px-4 text-textPrimary hover:text-gray-200 md:inline-block"
-          >
-            Projects
-          </a>
-          <a
-            href="#contact"
-            className="block py-2 px-4 text-textPrimary hover:text-gray-200 md:inline-block"
-          >
-            Contact
-          </a>
-        </div>
-      </div>
-    </nav>
-  );
-};
+//         {/* Hamburger Icon */}
+//         <div className="md:hidden">
+//           <button
+//             onClick={() => setMenuOpen(!menuOpen)}
+//             className="text-gray-800"
+//           >
+//             {menuOpen ? (
+//               <XMarkIcon className="w-6 h-6" />
+//             ) : (
+//               <Bars3Icon className="w-6 h-6" />
+//             )}
+//           </button>
+//         </div>
 
-export default Navbar;
+//         {/* Nav Links */}
+//         <ul
+//           className={`${
+//             menuOpen ? "block" : "hidden"
+//           } absolute top-16 left-0 w-full bg-white md:bg-transparent md:static md:flex md:space-x-8 transition-all duration-300 ease-in-out`}
+//         >
+//           {navLinks.map((link) => (
+//             <li key={link} className="text-center md:text-left">
+//               <a
+//                 href={`#${link}`}
+//                 onClick={handleLinkClick}
+//                 className="block px-4 py-2 capitalize text-gray-800 hover:text-red-500"
+//               >
+//                 {link}
+//               </a>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;

@@ -183,38 +183,39 @@ function App() {
 
   return (
     <div className={darkMode ? "app_dark" : "app"}>
-      <>
-        <Navbar />
+      {/* <Navbar /> */}
+      <Router>
+        {/* <Navbar /> */}
         <SideBars setColor={setColor} />
-        <Home setColor={setColor} />
-        <Projects setColor={setColor} />
-        <Skills setColor={setColor} />
+      </Router>
 
-        <WorkExperiences setColor={setColor} />
-        <Contact setColor={setColor} />
-        <div
-          style={{
-            backgroundColor: "#434343",
-            textAlign: "center",
-            paddingBottom: "10px",
-            fontFamily: "'Space Mono', monospace",
-            color: "white",
-            fontSize: "12px",
-          }}
+      <Home setColor={setColor} />
+      <Projects setColor={setColor} />
+      <Skills setColor={setColor} />
+      <WorkExperiences setColor={setColor} />
+      <Contact setColor={setColor} />
+      <div
+        style={{
+          backgroundColor: "#434343",
+          textAlign: "center",
+          paddingBottom: "10px",
+          fontFamily: "'Space Mono', monospace",
+          color: "white",
+          fontSize: "12px",
+        }}
+      >
+        Design inspired by{" "}
+        <a
+          href="https://www.muhammadaamirmalik.com/"
+          rel="noreferrer"
+          target="_blank"
+          style={{ color: "#f1ce5f" }}
         >
-          Design inspired by{" "}
-          <a
-            href="https://www.muhammadaamirmalik.com/"
-            rel="noreferrer"
-            target="_blank"
-            style={{ color: "#f1ce5f" }}
-          >
-            Muhammad Aamir's Portfolio
-          </a>
-        </div>
-        <ScrollProgressAndArrow progressColor={iconColor} />
-        <MaskedCursor />
-      </>
+          Muhammad Aamir's Portfolio
+        </a>
+      </div>
+      <ScrollProgressAndArrow progressColor={iconColor} />
+      <MaskedCursor />
     </div>
   );
 }
