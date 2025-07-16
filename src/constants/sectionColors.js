@@ -22,22 +22,20 @@ const sectionColors = {
     onChangeColor: "#00ADB5",
   },
   skills: {
-    default: "gray",
-    hover: "#B0BEC5",
-    defaultSectionColor: "#fff",
-
-    onChangeColor: "gray",
+    default: "#D7F0B6",
+    hover: "#D7F0B6",
+    defaultSectionColor: "#FAFFFD",
+    onChangeColor: "#D7F0B6",
   },
   experience: {
-    default: "#434343",
-    hover: "#757575",
-    defaultSectionColor: "#2A363B",
-
-    onChangeColor: "#434343",
+    default: "#3B429F", //AA7DCE
+    hover: "#3B429F",
+    defaultSectionColor: "#121619",
+    onChangeColor: "#3B429F",
   },
   contact: {
     default: "#faebcd",
-    hover: "#FFD700",
+    hover: "#f1ce5f",
     defaultSectionColor: "#2A363B",
     onChangeColor: "#f1ce5f",
   },

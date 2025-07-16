@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useSpring } from "framer-motion";
 import SideBars from "./components/sideBars/SideBar.jsx";
-import Navbar from "./components/sideBars/NavBar.js";
 import MaskedCursor from "./components/cursor/MaskedCursor.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MediaQuery from "react-responsive";
@@ -10,7 +9,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/home/Home.jsx";
 import Contact from "./components/contacts/contact";
-import NavBar from "./components/navBar/NavBar.js";
+// import NavBar from "./components/navBar/NavBar.js";
 import WorkExperiences from "./components/workExperience/WorkExperiences";
 import Projects from "./components/projects/Projects.jsx";
 import Skills from "./components/skills/Skills.jsx";

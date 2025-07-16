@@ -16,7 +16,8 @@
 
 .role-item-wrapper {
   position: relative;
-  margin-left: 20px; /* shifts jobs right for curve */
+  margin-left: 20px;
+  /* shifts jobs right for curve */
   padding-left: 20px;
 }
 
@@ -33,11 +34,12 @@
 .experience-container {
   /* max-width: 600px; */
   max-width: 500px;
-  height: 100vh;
+  /* height: 100vh; */
   margin: auto;
   padding: 30px 20px;
   font-family: "Segoe UI", sans-serif;
   align-items: center;
+  padding: 100px 0;
   align-content: center;
 }
 

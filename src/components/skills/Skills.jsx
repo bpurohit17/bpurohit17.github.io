@@ -13,7 +13,7 @@ const Skills = ({ setColor }) => {
 
   return (
     <section id="skills" ref={ref}>
-      <div style={{ backgroundColor: "#222831", height: "100vh" }}>
+      <div style={{ backgroundColor: "#222831" }}>
         <div className="container-skills">
           <div
             className="skills-bp-container"

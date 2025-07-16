@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import sectionColors from "../../constants/sectionColors";
+import { Github, Instagram, Linkedin, Mail } from "@geist-ui/react-icons";
 import "./SideBar.css";
+import sectionColors from "../../constants/sectionColors";
 
-const SideBars = ({ color, scrollToSection }) => {
+const SideBars = () => {
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
 
   const defaultColor = sectionColors[activeSection]?.default || "#2a363b";
-  const hoverColor = sectionColors[activeSection]?.hover || defaultColor;
+  const hoverColor = sectionColors[activeSection]?.hover || "#2a363b";
   const defaultSectionColor = sectionColors[activeSection]?.defaultSectionColor;
+
+  const iconColor = (iconName) =>
+    hoveredIcon === iconName ? hoverColor : defaultColor;
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -38,41 +43,131 @@ const SideBars = ({ color, scrollToSection }) => {
   }, []);
 
   return (
-    <nav
-      className="navbar"
-      style={{
-        "--icon-color": defaultColor,
-        "--hover-color": hoverColor,
-        "--defaultSectionColor": defaultSectionColor,
-      }}
-    >
-      <div className="menu-toggle" onClick={toggleMenu}>
-        <div className={`hamburger ${menuOpen ? "open" : ""}`}></div>
+    <>
+      <nav
+        className="navbar"
+        style={{
+          "--icon-color": defaultColor,
+          "--hover-color": hoverColor,
+          "--defaultSectionColor": defaultSectionColor,
+        }}
+      >
+        <div className="menu-toggle" onClick={toggleMenu}>
+          <div className={`hamburger ${menuOpen ? "open" : ""}`}></div>
+        </div>
+
+        <ul className={`menu ${menuOpen ? "menu-open" : ""}`}>
+          {["home", "projects", "skills", "experience", "contact"].map(
+            (section) => (
+              <li key={section}>
+                <a
+                  href={`#${section}`}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    console.log(menuOpen);
+                  }}
+                  className={`block px-4 py-2 text-center capitalize ${
+                    activeSection === section ? "active" : ""
+                  } ${
+                    activeSection === section ? "font-bold" : "text-gray-700"
+                  }`}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+
+                  {/* {section} */}
+                </a>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+
+      {/* Left Social Icons */}
+      <div className="left-bar">
+        <ul>
+          <li>
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://github.com/bpurohit17"
+              onMouseEnter={() => setHoveredIcon("github")}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              <Github
+                color={iconColor("github")}
+                className="mb-6"
+                strokeWidth={2}
+                size={20}
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://www.linkedin.com/in/bpurohit17/"
+              onMouseEnter={() => setHoveredIcon("linkedin")}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              <Linkedin
+                color={iconColor("linkedin")}
+                className="mb-6"
+                strokeWidth={2}
+                size={20}
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="mailto:bhagyashrip830@gmail.com"
+              onMouseEnter={() => setHoveredIcon("mail")}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              <Mail
+                color={iconColor("mail")}
+                className="mb-6"
+                strokeWidth={2}
+                size={20}
+              />
+            </a>
+          </li>
+        </ul>
+        <div
+          className="vertical-line"
+          style={{ backgroundColor: defaultColor }}
+        />
       </div>
 
-      <ul className={`menu ${menuOpen ? "menu-open" : ""}`}>
-        {["home", "projects", "skills", "experience", "contact"].map(
-          (section) => (
-            <li key={section}>
-              <a
-                href={`#${section}`}
-                onClick={() => {
-                  setMenuOpen(false);
-                  console.log(menuOpen);
-                }} // auto-close on click
-                className={`block px-4 py-2 text-center capitalize ${
-                  activeSection === section
-                    ? "text-red-500 font-bold"
-                    : "text-gray-700"
-                }`}
-              >
-                {section}
-              </a>
-            </li>
-          )
-        )}
-      </ul>
-    </nav>
+      {/* Right Email Text */}
+      <div className="right-bar">
+        <div className="fixed bottom-0 right-6 z-40 hidden md:flex flex-col items-center">
+          <div
+            className="flex flex-col mb-6"
+            style={{
+              writingMode: "vertical-rl",
+              letterSpacing: "2px",
+              color: iconColor,
+            }}
+          >
+            <a
+              className="email"
+              href="mailto:bhagyashrip830@gmail.com"
+              style={{ color: iconColor("gmail") }}
+              onMouseEnter={() => setHoveredIcon("gmail")}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              bhagyashrip830@gmail.com
+            </a>
+          </div>
+          <div
+            className="vertical-line"
+            style={{ backgroundColor: defaultColor }}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

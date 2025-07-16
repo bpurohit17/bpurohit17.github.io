@@ -52,7 +52,6 @@ body {
     align-items: center;
     text-align: center;
     padding-right: 16px;
-    /* margin: 0 30px; */
 }
 
 
@@ -178,7 +177,7 @@ body {
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 100px 0 20px;
+        padding: 100px 0;
         align-items: center;
         text-align: center;
         align-content: center;
@@ -191,6 +190,7 @@ body {
         color: #EEEEEE;
         white-space: nowrap;
         margin-right: 20px;
+        padding-bottom: 40px;
     }
 
     .skills-title-line-container {
