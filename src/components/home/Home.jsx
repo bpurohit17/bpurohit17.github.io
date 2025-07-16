@@ -12,6 +12,15 @@ const Home = ({ setColor, scrollToSection }) => {
     threshold: 0.5,
   });
 
+  function download(url) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = url.split("/").pop();
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   useEffect(() => {
     if (inView) {
       setColor("#ffffff");
@@ -38,12 +47,21 @@ const Home = ({ setColor, scrollToSection }) => {
             </div>
             <div className="btn">
               <a
-                href="https://drive.google.com/file/d/109v2OjFRT6-19LTtH1Vml-F9tTXAcrdI/view?usp=sharing"
+                href="https://drive.google.com/uc?export=download&id=1QAgIsoZ5cPs5--6plIFW8YsX0bo1-xvu"
+                download="Bhagyashri-Purohit-Resume.pdf"
                 rel="noreferrer"
                 target="_blank"
               >
                 Download Resume
               </a>
+
+              {/* <a
+                href="https://drive.google.com/uc?export=download&id=109v2OjFRT6-19LTtH1Vml-F9tTXAcrdI"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Download Resume
+              </a> */}
             </div>
             <div></div>
           </div>
