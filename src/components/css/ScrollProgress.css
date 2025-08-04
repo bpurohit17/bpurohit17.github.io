@@ -8,7 +8,6 @@
     left: 50%;
     color: white;
     font-size: 3em;
-    font-family: "Montserrat", sans-serif;
     text-align: center;
 }
 
@@ -65,23 +64,6 @@ span.appear {
     }
 }
 
-/* body p {
-    display: block;
-    clear: both;
-    height: 30px;
-}
-
-body p:has(span) {
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    text-align: center;
-    font-size: 7.5ch;
-    font-weight: 700;
-} */
-
-/* body {
-    overflow-x: hidden;
-} */
 
 @keyframes scroller {
     from {

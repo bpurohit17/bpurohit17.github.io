@@ -37,10 +37,28 @@
   /* height: 100vh; */
   margin: auto;
   padding: 30px 20px;
-  font-family: "Segoe UI", sans-serif;
   align-items: center;
   padding: 100px 0;
   align-content: center;
+}
+
+.experience-bp-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: -webkit-fill-available;
+  margin-bottom: 36px;
+
+  /* padding: 0 260px; */
+}
+
+.experience-title-text {
+  font-size: clamp(24px, 8vw, 40px);
+  line-height: 40px;
+  font-weight: 700;
+  color: #282c34;
+  white-space: nowrap;
+  margin-right: 20px;
 }
 
 .experience-container h2 {

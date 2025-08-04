@@ -121,7 +121,7 @@ const SideBars = () => {
             <a
               rel="noreferrer"
               target="_blank"
-              href="mailto:bhagyashrip830@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=bhagyashrip830@gmail.com&su=Opportunity%20to%20Connect&body=Hi%20Bhagyashri%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20connect%20with%20you%20regarding%20an%20opportunity.%0A%0ABest%20regards%2C%0A[Your%20Name]"
               onMouseEnter={() => setHoveredIcon("mail")}
               onMouseLeave={() => setHoveredIcon(null)}
             >
@@ -153,7 +153,9 @@ const SideBars = () => {
           >
             <a
               className="email"
-              href="mailto:bhagyashrip830@gmail.com"
+              rel="noreferrer"
+              target="_blank"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=bhagyashrip830@gmail.com&su=Opportunity%20to%20Connect&body=Hi%20Bhagyashri%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20connect%20with%20you%20regarding%20an%20opportunity.%0A%0ABest%20regards%2C%0A[Your%20Name]"
               style={{ color: iconColor("gmail") }}
               onMouseEnter={() => setHoveredIcon("gmail")}
               onMouseLeave={() => setHoveredIcon(null)}

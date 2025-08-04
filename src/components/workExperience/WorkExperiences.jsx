@@ -96,24 +96,15 @@ const WorkExperiences = ({ setColor }) => {
     }
   }, [inView, setColor]);
 
-  //   useEffect(() => {
-  //     setCurrActive("contact");
-  //   }, [setCurrActive]);
-
-  //   const totalRoles = experiences.reduce(
-  //     (acc, company) => acc + company.roles.length,
-  //     0
-  //   );
-  //   const hasMultipleRoles = experiences.some(
-  //     (company) => company.roles.length > 1
-  //   );
-  //   //   const hasMultipleRoles = experiences.roles > 1;
-
-  //   console.log(hasMultipleRoles);
   return (
     <section id="experience" ref={ref}>
       <div className="experience-container">
-        <h2>Experience</h2>
+        <div className="experience-bp-container">
+          <div className="experience-title-text">Experience</div>
+          <div className="title-line-container">
+            <div className="title-line"></div>
+          </div>
+        </div>{" "}
         <div className="timeline">
           {/* <div className={`timeline ${hasMultipleRoles > 1 ? "with-border" : ""}`}> */}
           {experiences.map((company, companyIndex) => (
@@ -174,50 +165,6 @@ const WorkExperiences = ({ setColor }) => {
         </div>
       </div>
     </section>
-
-    ///////////////////////////////////////////////////////////
-
-    // <div>
-    //   <img
-    //     src="/images/canvas_2.svg"
-    //     width={100}
-    //     alt="canvas 2"
-    //     style={{ width: "100%", display: "block" }}
-    //   />
-    //   <div className="container-work" style={{ backgroundColor: "#F96353" }}>
-    //     <div style={{ maxWidth: "600px" }}>
-    //       <div class="txt">Experience</div>
-    //       <div class="title">Let's Work Together</div>
-    //       <div class="txt" style={{ color: "#faebcd" }}>
-    //         I'm open for new opportunities - especially ambitious or large
-    //         projects. However, my inbox is always open. Whether you have a
-    //         question or just want to say hi, I'll try my best to get back to
-    //         you!.
-    //       </div>
-    //     </div>
-    //     <div class="contact_btn">Say Hello</div>
-    //     <div class="contact_git_section"></div>
-    //   </div>
-    //   <img
-    //     src="/images/canvas.svg"
-    //     alt="canvas"
-    //     style={{ width: "100%", display: "block" }}
-    //   />
-    // </div>
-    // <svg
-    //   width="41"
-    //   height="52"
-    //   viewBox="0 0 41 52"
-    //   fill="none"
-    //   xmlns="http://www.w3.org/2000/svg"
-    // >
-    //   <path
-    //     d="M41 49H29.6C14.894 49 3 33.663 3 14.7V9.8V0"
-    //     stroke="#292D32"
-    //     strokeWidth="5"
-    //     strokeLinejoin="round"
-    //   />
-    // </svg>
   );
 };
 

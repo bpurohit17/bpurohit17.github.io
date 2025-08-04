@@ -19,16 +19,7 @@ const Projects = ({ setColor }) => {
       <div style={{}}>
         {/* <SliderBlogCard /> */}
         <div className="container-projects">
-          <div
-            className="bp-container"
-            // style={{
-            //   display: "flex",
-            //   flexDirection: "row",
-            //   alignItems: "center",
-            //   width: "-webkit-fill-available",
-            //   padding: "0 260px",
-            // }}
-          >
+          <div className="bp-container">
             <div className="title-text">
               Things I've Worked on, Some of Them
             </div>
@@ -68,8 +59,8 @@ const Projects = ({ setColor }) => {
             imageUrl={`${process.env.PUBLIC_URL}/images/planset-img.png`}
             featuredText="Featured Project"
             flipData={true}
-            link="https://software.gwrepermit.com/"
-            // gitLink="https://github.com/look-at-clay/bulko-user-app"
+            link="https://planset.gwrepermit.com/"
+            // link="https://software.gwrepermit.com/"
           />
           <ProjectItem
             title="BioTradX"
@@ -78,6 +69,18 @@ const Projects = ({ setColor }) => {
             imageUrl={`${process.env.PUBLIC_URL}/images/biotradx-img.png`}
             featuredText="Featured Project"
             link="https://devportfolio.biotradx.com/"
+            // gitLink="https://github.com/look-at-clay/bulko-user-app"
+            // playstoreLink="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
+            // appStoreLink="https://apps.apple.com/in/developer/team-green-force-inc/id1719754974"
+          />
+          <ProjectItem
+            title="Indian Solar GWRE Website"
+            description="GWRE offers solar EPC services, sustainable infrastructure design, and project planning with a focus on solar mini‑grids, solar PV systems, energy‑efficient infrastructure, and resource conservation."
+            techStack="React Js, Tailwind CSS"
+            imageUrl={`${process.env.PUBLIC_URL}/images/indian-solar-img.png`}
+            featuredText="Featured Project"
+            flipData={true}
+            link="https://india.greenworld-energy.com/"
             // gitLink="https://github.com/look-at-clay/bulko-user-app"
             // playstoreLink="https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN"
             // appStoreLink="https://apps.apple.com/in/developer/team-green-force-inc/id1719754974"
