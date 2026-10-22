@@ -6,7 +6,7 @@ const TypingEffect = () => {
     "A mobile app developer",
     "I build things for the app",
     "A fullstack hybrid app developer",
-    // "A fullstack web developer",
+    "A fullstack web developer",
   ];
 
   const scrambleChars = "<>!{}[]()*&^%$#@~";

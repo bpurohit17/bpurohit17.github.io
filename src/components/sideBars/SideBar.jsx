@@ -22,7 +22,7 @@ const SideBars = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "projects", "skills", "experience", "contact"];
+      const sections = ["home", "projects", "skills", "contact"];
       let current = "";
       const middle = window.innerHeight / 2;
       sections.forEach((section) => {
@@ -57,28 +57,24 @@ const SideBars = () => {
         </div>
 
         <ul className={`menu ${menuOpen ? "menu-open" : ""}`}>
-          {["home", "projects", "skills", "experience", "contact"].map(
-            (section) => (
-              <li key={section}>
-                <a
-                  href={`#${section}`}
-                  onClick={() => {
-                    setMenuOpen(false);
-                    console.log(menuOpen);
-                  }}
-                  className={`block px-4 py-2 text-center capitalize ${
-                    activeSection === section ? "active" : ""
-                  } ${
-                    activeSection === section ? "font-bold" : "text-gray-700"
-                  }`}
-                >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
+          {["home", "projects", "skills", "contact"].map((section) => (
+            <li key={section}>
+              <a
+                href={`#${section}`}
+                onClick={() => {
+                  setMenuOpen(false);
+                  console.log(menuOpen);
+                }}
+                className={`block px-4 py-2 text-center capitalize ${
+                  activeSection === section ? "active" : ""
+                } ${activeSection === section ? "font-bold" : "text-gray-700"}`}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
 
-                  {/* {section} */}
-                </a>
-              </li>
-            )
-          )}
+                {/* {section} */}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 

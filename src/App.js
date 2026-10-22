@@ -157,9 +157,10 @@ function App() {
       </Router>
 
       <Home setColor={setColor} />
+
       <Projects setColor={setColor} />
       <Skills setColor={setColor} />
-      <WorkExperiences setColor={setColor} />
+      {/* <WorkExperiences setColor={setColor} /> */}
       <Contact setColor={setColor} />
       <div
         style={{

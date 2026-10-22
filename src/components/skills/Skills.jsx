@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import "./Skills.css";
 import SkillItem from "./SkillItem";
+import FolderFloat from "../../component/FolderFloat";
 const Skills = ({ setColor }) => {
   const { ref, inView } = useInView({ threshold: 0.5 });
 
@@ -13,8 +14,120 @@ const Skills = ({ setColor }) => {
 
   return (
     <section id="skills" ref={ref}>
-      <div style={{ backgroundColor: "#222831" }}>
-        <div className="container-skills">
+      <div className="skills-layout">
+        <div className="flex flex-col">
+          <div className="skills-title-text">Tech Stack & Tools</div>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg text-center">
+            The skills I bring to the table and the tools I use to turn ideas
+            into working experiences.
+          </p>
+          <div className="skills-title-line-container">
+            <div className="skills-title-line"></div>
+          </div>
+        </div>
+
+        <div className="folder-float-wrapper">
+          <div className="skills-folders-stack">
+            <FolderFloat
+              items={[
+                "HTML5",
+                "CSS3",
+                "JavaScript",
+                "React JS",
+                "Tailwind CSS",
+              ]}
+              label="Frontend Development"
+              sublabel="5 skills"
+              trigger="hover"
+              closeOnSelect={false}
+              physics
+              folderColor="#3f3f46"
+              frontColor="#3f3f46"
+              paperColor="#f5f5f5"
+              itemColor="#dfd1fc"
+              itemTextColor="#3a1358"
+              labelColor="#f5f5f5"
+              width={200}
+              height={148}
+              spread={180}
+              lift={26}
+            />
+
+            <FolderFloat
+              items={["Flutter", "Dart"]}
+              label="Mobile Development"
+              sublabel="2 skills"
+              trigger="hover"
+              closeOnSelect={false}
+              physics
+              folderColor="#3f3f46"
+              frontColor="#3f3f46"
+              paperColor="#f5f5f5"
+              itemColor="#dfd1fc"
+              itemTextColor="#3a1358"
+              labelColor="#f5f5f5"
+              width={200}
+              height={148}
+              spread={180}
+              lift={26}
+            />
+
+            <FolderFloat
+              items={[
+                "SQL Server",
+                "MySQL",
+                "Firebase",
+                "SupaBase",
+                "Java Spring Boot",
+                "ASP.NET",
+              ]}
+              label="Database & Backend"
+              sublabel="6 skills"
+              trigger="hover"
+              closeOnSelect={false}
+              physics
+              folderColor="#3f3f46"
+              frontColor="#3f3f46"
+              paperColor="#f5f5f5"
+              itemColor="#dfd1fc"
+              itemTextColor="#3a1358"
+              labelColor="#f5f5f5"
+              width={200}
+              height={148}
+              spread={180}
+              lift={26}
+            />
+
+            <FolderFloat
+              items={[
+                "Git",
+                "GitHub",
+                "AWS",
+                "CI/CD",
+                "Postman",
+                "Figma",
+                "Notion",
+              ]}
+              label="Tools & Workflow"
+              sublabel="7 tools"
+              trigger="hover"
+              closeOnSelect={false}
+              physics
+              folderColor="#3f3f46"
+              frontColor="#3f3f46"
+              paperColor="#f5f5f5"
+              itemColor="#dfd1fc"
+              itemTextColor="#3a1358"
+              labelColor="#f5f5f5"
+              width={200}
+              height={148}
+              spread={180}
+              lift={26}
+            />
+          </div>
+        </div>
+
+        {/* <div className="container-skills">
           <div className="skills-bp-container">
             <div className="skills-title-text">Tech Stack & Tools</div>
             <div className="skills-title-line-container">
@@ -370,7 +483,7 @@ const Skills = ({ setColor }) => {
               </svg>
             </SkillItem>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
