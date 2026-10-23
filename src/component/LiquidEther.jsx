@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+const getIsMobile = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(max-width: 768px)").matches;
+const isMobile = getIsMobile();
 
 const PIXEL_BUDGET = 2.4e6;
 const MAX_CELLS = 140000;

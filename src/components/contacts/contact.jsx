@@ -11,10 +11,10 @@ const Contact = ({ setColor }) => {
     <section
       id="contact"
       ref={ref}
-      className="relative isolate flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
+      className="relative isolate min-h-[100svh] w-full overflow-hidden bg-black"
     >
-      {/* Animated background */}
-      <div className="pointer-events-auto absolute inset-0 z-0 size-full">
+      {/* Ball animation starts lower to prevent spheres being cut at the top */}
+      <div className="pointer-events-auto absolute inset-x-0 bottom-0 top-24 z-0 sm:top-16">
         <Ballpit
           count={120}
           colors={["#dfd1fc"]}
@@ -38,6 +38,12 @@ const Contact = ({ setColor }) => {
           intro
         />
       </div>
+
+      {/* Smooth transition from Skills into Contact */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-48 bg-gradient-to-b from-black via-black/80 to-transparent sm:h-56" />
+
+      {/* Subtle bottom fade */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-24 bg-gradient-to-t from-black/50 to-transparent" />
 
       {/* Foreground content */}
       <div className="relative z-10 flex min-h-[100svh] w-full flex-col items-start justify-center gap-7 overflow-hidden px-[8%] py-24 max-md:min-h-[85svh] max-md:gap-6 max-md:px-[7%] max-md:py-20 max-sm:min-h-[80svh] max-sm:px-[6%] max-sm:py-16">

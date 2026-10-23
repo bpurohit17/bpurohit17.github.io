@@ -9,78 +9,89 @@ const Home = ({ setColor, scrollToSection }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const updateScreen = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateScreen = () => setIsMobile(mediaQuery.matches);
 
     updateScreen();
-    window.addEventListener("resize", updateScreen);
+    mediaQuery.addEventListener("change", updateScreen);
 
-    return () => window.removeEventListener("resize", updateScreen);
+    return () => mediaQuery.removeEventListener("change", updateScreen);
   }, []);
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative isolate flex min-h-screen w-full items-center overflow-hidden bg-[#08070b] text-white"
+      className="relative isolate flex min-h-[100svh] w-full items-center overflow-hidden bg-[#08070b] text-white"
     >
-      {/* Animated background */}
+      {/* CSS fallback always works, even without WebGL */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#08070b]"
         aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#08070b]"
       >
-        <LiquidEther
-          colors={["#6f2aa5", "#8b3cd6", "#dfd1fc"]}
-          mouseForce={isMobile ? 15 : 41}
-          cursorSize={isMobile ? 30 : 55}
-          persistence={0.75}
-          autoDemo={!isMobile}
-          autoSpeed={0.35}
-          autoIntensity={isMobile ? 1 : 3.2}
-          viscosity={0.34}
-          intensity={isMobile ? 0.3 : 0.55}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_35%,rgba(111,42,165,0.28),transparent_48%),radial-gradient(ellipse_at_85%_70%,rgba(139,60,214,0.15),transparent_45%)]" />
+
+        {/* GPU-heavy background only on desktop */}
+        {!isMobile && (
+          <LiquidEther
+            colors={["#6f2aa5", "#8b3cd6", "#dfd1fc"]}
+            mouseForce={41}
+            cursorSize={55}
+            persistence={0.75}
+            autoDemo
+            autoSpeed={0.35}
+            autoIntensity={3.2}
+            viscosity={0.34}
+            intensity={0.55}
+          />
+        )}
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 flex min-h-screen w-full items-center px-5 py-24 text-left sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <div className="relative z-10 flex min-h-[100svh] w-full items-center px-5 py-24 text-left sm:px-8 md:px-12 lg:px-16 xl:px-20">
         <div className="w-full max-w-5xl">
           <p className="mb-3 text-lg font-semibold sm:text-xl md:text-2xl">
             G&apos;day, I&apos;m
           </p>
 
-          <div className="w-full min-w-0 overflow-hidden">
-            <TechText
-              key={isMobile ? "mobile" : "desktop"}
-              text="Bhagyashri Purohit"
-              fontWeight={600}
-              fontSize={isMobile ? 42 : 150}
-              align="left"
-              letterSpacing={-0.05}
-              color="currentColor"
-              accentColor="currentColor"
-              reveal="letter"
-              dashLength={4}
-              dashGap={2}
-              specks={isMobile ? 5 : 15}
-              intro="none"
-              introDuration={2}
-              clickKick
-              guides={false}
-              reach={isMobile ? 80 : 200}
-              softness={0.7}
-              lineStyle="dashed"
-              strokeWidth={1.5}
-              speed={1}
-              bounce={0.4}
-              selection
-              labels
-              draggable={!isMobile}
-              sweep
-              className="pointer-events-auto"
-            />
-          </div>
+          {isMobile ? (
+            /* Reliable mobile heading: no canvas or WebGL dependency */
+            <h1 className="m-0 max-w-full break-words text-[clamp(2.25rem,9vw,3.5rem)] font-semibold leading-[1.08] tracking-tight text-[#dfd1fc]">
+              Bhagyashri Purohit
+            </h1>
+          ) : (
+            <div className="w-full min-w-0">
+              <TechText
+                text="Bhagyashri Purohit"
+                fontWeight={600}
+                fontSize={150}
+                align="left"
+                letterSpacing={-0.05}
+                color="#ffffff"
+                accentColor="#dfd1fc"
+                reveal="letter"
+                dashLength={4}
+                dashGap={2}
+                specks={15}
+                intro="none"
+                introDuration={2}
+                clickKick
+                guides={false}
+                reach={200}
+                softness={0.7}
+                lineStyle="dashed"
+                strokeWidth={1.5}
+                speed={1}
+                bounce={0.4}
+                selection
+                labels
+                draggable
+                sweep
+                className="pointer-events-auto"
+              />
+            </div>
+          )}
 
           <div className="mt-5 w-full max-w-2xl sm:mt-6">
             <div className="mb-3 text-base font-medium sm:text-lg md:text-xl">

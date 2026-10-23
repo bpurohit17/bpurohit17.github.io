@@ -52,7 +52,7 @@ const Skills = ({ setColor }) => {
     <section
       id="skills"
       ref={ref}
-      className="relative box-border min-h-[500px] w-full overflow-visible px-4 py-12 sm:px-7 sm:py-16 lg:px-10 lg:py-20"
+      className="relative box-border min-h-[500px] w-full overflow-visible bg-black px-4 pb-16 pt-12 sm:px-7 sm:pb-24 sm:pt-16 lg:px-10 lg:pb-28 lg:pt-20"
     >
       <div className="mx-auto flex w-full max-w-[1250px] flex-col items-center gap-8 overflow-visible sm:gap-20 lg:gap-24">
         {/* Heading */}
@@ -68,7 +68,7 @@ const Skills = ({ setColor }) => {
         </div>
 
         {/* Responsive folder grid */}
-        <div className="w-full overflow-visible px-0 py-24 sm:px-2 lg:py-14">
+        <div className="w-full overflow-visible px-0 pb-16 pt-16 sm:px-2 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-14">
           <div className="grid w-full grid-cols-1 justify-items-center gap-x-6 gap-y-48 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-36 lg:gap-x-12 xl:grid-cols-4 xl:gap-x-6">
             <FolderFloat
               {...folderProps}
