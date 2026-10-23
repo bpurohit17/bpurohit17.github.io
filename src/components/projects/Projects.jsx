@@ -76,6 +76,7 @@ const Projects = ({ setColor }) => {
           link: "https://gwrewebsitebackend.gwrepermit.com/",
           iconName: "BsWindowDock",
           label: "GWRE indian solar CRM",
+          autoplay: false,
         },
       ],
     },
@@ -167,7 +168,7 @@ const Projects = ({ setColor }) => {
       // imageUrl: `${process.env.PUBLIC_URL}/images/indian-solar-img.png`,
       media: [
         {
-          src: `${process.env.PUBLIC_URL}/videos/JAP.mp4`,
+          src: `${process.env.PUBLIC_URL}/videos/JAP_final.mp4`,
           alt: "Just About Placements platform walkthrough",
           title: "Platform Demo",
           type: "video",
@@ -204,13 +205,13 @@ const Projects = ({ setColor }) => {
       techStack: "React JS | Tailwind CSS | SQL",
       flipData: true,
       link: "https://jldc.co/",
-
       media: [
         {
-          src: `${process.env.PUBLIC_URL}/videos/JLDC.mp4`,
+          src: `${process.env.PUBLIC_URL}/videos/JLDC-final.mp4`,
           alt: "JLDC",
           title: "JLDC",
           type: "video",
+          autoplay: false,
         },
       ],
     },
