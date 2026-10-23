@@ -6,21 +6,6 @@ import Lightfall from "../../component/Lightfall.jsx";
 import ScrollReveal from "../../component/ScrollReveal.jsx";
 import FlexCarousel from "../../component/FlexCarousel.jsx";
 
-const items = [
-  { src: "/images/one.jpg", alt: "A chrome sculpture", title: "Iridescence" },
-  {
-    src: "/images/two.jpg",
-    alt: "A figure on a white set",
-    title: "White Room",
-  },
-  {
-    src: "/images/three.jpg",
-    alt: "A clay bust in profile",
-    title: "Clay Study",
-    subtitle: "Studio 04",
-  },
-];
-
 const Projects = ({ setColor }) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -254,7 +239,7 @@ const Projects = ({ setColor }) => {
 
       <div className="relative z-10 ">
         <FlexCarousel
-          items={items}
+          // items={items}
           preset="liquid"
           intro="rise"
           cardHeight={0.5}

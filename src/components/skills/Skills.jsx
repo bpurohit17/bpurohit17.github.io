@@ -67,6 +67,7 @@ const Skills = ({ setColor }) => {
           <div className="grid grid-cols-1 justify-items-center gap-x-6 gap-y-24 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-28 lg:gap-x-12 xl:grid-cols-4 xl:gap-x-6">
             <FolderFloat
               {...folderProps}
+              trigger="hover"
               items={[
                 "HTML5",
                 "CSS3",
@@ -80,6 +81,7 @@ const Skills = ({ setColor }) => {
 
             <FolderFloat
               {...folderProps}
+              trigger="hover"
               items={["Flutter", "Dart"]}
               label="Mobile Development"
               sublabel="2 skills"
@@ -87,6 +89,7 @@ const Skills = ({ setColor }) => {
 
             <FolderFloat
               {...folderProps}
+              trigger="hover"
               items={[
                 "SQL Server",
                 "MySQL",
@@ -101,6 +104,7 @@ const Skills = ({ setColor }) => {
 
             <FolderFloat
               {...folderProps}
+              trigger="hover"
               items={[
                 "Git",
                 "GitHub",

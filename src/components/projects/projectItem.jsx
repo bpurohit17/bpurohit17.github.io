@@ -29,6 +29,31 @@ const portalIconMap = {
   TbUserScan,
   LuMonitorCog,
 };
+
+const glassActionClass =
+  "relative grid size-10 shrink-0 place-items-center overflow-hidden rounded-xl border border-white/[0.13] bg-[linear-gradient(145deg,rgba(255,255,255,0.09),rgba(255,255,255,0.015))] text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_5px_12px_rgba(0,0,0,0.22)]";
+
+const GlassAction = ({ href, label, title, children }) => {
+  if (!href) return null;
+
+  return (
+    <a
+      className={glassActionClass}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      title={title}
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"
+      />
+      <span className="relative z-[1]">{children}</span>
+    </a>
+  );
+};
+
 const ProjectItem = ({
   title,
   link,
@@ -47,36 +72,30 @@ const ProjectItem = ({
   const technologies = Array.isArray(techStack)
     ? techStack
     : typeof techStack === "string"
-    ? techStack
-        .split("|")
-        .map((tech) => tech.trim())
-        .filter(Boolean)
-    : [];
+      ? techStack
+          .split("|")
+          .map((tech) => tech.trim())
+          .filter(Boolean)
+      : [];
 
   const descriptions = Array.isArray(description)
     ? description.filter(Boolean)
     : description
-    ? [description]
-    : [];
+      ? [description]
+      : [];
 
-  // Convert every media item to the format MorphSlider expects.
   const sliderItems = useMemo(() => {
-    const sourceItems = Array.isArray(media) ? media : [];
-
-    const normalizedItems = sourceItems
+    const normalizedItems = (Array.isArray(media) ? media : [])
       .map((item, index) => {
         const mediaObject = typeof item === "string" ? { src: item } : item;
-
         const src =
           mediaObject?.src || mediaObject?.image || mediaObject?.video;
 
         if (!src) return null;
 
-        const type = mediaObject.type || (isVideoFile(src) ? "video" : "image");
-
         return {
           src,
-          type,
+          type: mediaObject.type || (isVideoFile(src) ? "video" : "image"),
           caption:
             mediaObject.caption ||
             mediaObject.title ||
@@ -88,34 +107,50 @@ const ProjectItem = ({
       })
       .filter(Boolean);
 
-    if (normalizedItems.length > 0) return normalizedItems;
+    if (normalizedItems.length) return normalizedItems;
 
-    if (imageUrl) {
-      return [
-        {
-          src: imageUrl,
-          type: "image",
-          caption: `${title} preview`,
-        },
-      ];
-    }
-
-    return [];
+    return imageUrl
+      ? [{ src: imageUrl, type: "image", caption: `${title} preview` }]
+      : [];
   }, [media, imageUrl, title]);
-
-  const actionClass =
-    "grid size-9 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/[0.04] text-white/80 transition duration-200 hover:-translate-y-0.5 hover:border-[#8B3CD6]/70 hover:bg-[#8B3CD6]/15 hover:text-[#DFD1FC] motion-reduce:transition-none";
 
   return (
     <article
-      className={`group relative isolate grid w-full min-w-0 grid-cols-1 items-center gap-6 overflow-hidden rounded-xl border border-[#DFD1FC]/15 bg-gradient-to-br from-[#6F2AA5]/15 via-[#100d16]/95 to-[#08080b]/95 p-[13px] shadow-[0_24px_70px_rgba(0,0,0,0.2)] transition duration-300 hover:border-[#8B3CD6]/35 hover:shadow-[0_28px_80px_rgba(0,0,0,0.34),0_0_36px_rgba(139,60,214,0.12)] motion-reduce:transition-none md:grid-cols-2 md:gap-7 md:rounded-2xl md:p-5 lg:gap-10 lg:p-7 xl:gap-[clamp(2rem,5vw,5.5rem)] ${
+      className={`project-card group relative isolate grid w-full min-w-0 grid-cols-1 items-center gap-6 overflow-hidden rounded-2xl border border-white/[0.13] bg-[#0b0910] p-[13px] shadow-[inset_0_1px_0_rgba(255,255,255,0.10),inset_0_-1px_0_rgba(0,0,0,0.8),0_24px_65px_rgba(0,0,0,0.38),0_0_45px_rgba(111,42,165,0.07)] md:grid-cols-2 md:gap-7 md:p-5 lg:gap-10 lg:p-7 xl:gap-[clamp(2rem,5vw,5.5rem)] ${
         flipData ? "md:[&_.project-visual]:order-2" : ""
       }`}
     >
-      {/* Project media */}
-      <div className="project-visual relative min-w-0">
-        <div className="relative isolate aspect-[1/1.2] overflow-hidden rounded-xl border border-white/15 bg-[#111014] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_18px_45px_rgba(0,0,0,0.25)] md:aspect-[1.68/1]">
-          <div className="pointer-events-none absolute -inset-[15%] -z-10 bg-[#8B3CD6]/30 blur-[45px]" />
+      {/* Static glass material */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] bg-[linear-gradient(145deg,rgba(139,60,214,0.14)_0%,rgba(255,255,255,0.045)_16%,transparent_43%,rgba(139,60,214,0.035)_78%,rgba(0,0,0,0.18)_100%)]"
+      />
+
+      {/* Broad, static light reflections */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] bg-[radial-gradient(ellipse_at_0%_0%,rgba(186,139,255,0.13),transparent_42%),radial-gradient(ellipse_at_100%_100%,rgba(111,42,165,0.12),transparent_40%)]"
+      />
+
+      {/* Inner glass rim */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] border border-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_45px_rgba(255,255,255,0.012)]"
+      />
+
+      {/* Top specular highlight */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-8 top-0 z-[2] h-px bg-gradient-to-r from-transparent via-[#E8D8FF]/60 to-transparent"
+      />
+
+      {/* Media frame */}
+      <div className="project-visual relative z-[1] min-w-0">
+        <div className="relative isolate aspect-[1/1.2] overflow-hidden rounded-2xl border border-white/[0.14] bg-[#100d15] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-12px_25px_rgba(0,0,0,0.2),0_12px_28px_rgba(0,0,0,0.35),0_28px_55px_-35px_rgba(139,60,214,0.4)] md:aspect-[1.68/1]">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-[12%] -z-10 bg-[#8B3CD6]/25 blur-[45px]"
+          />
 
           {sliderItems.length > 0 ? (
             <MorphSlider
@@ -141,132 +176,161 @@ const ProjectItem = ({
               className="absolute inset-0"
             />
           ) : (
-            <div className="grid size-full place-items-center text-center text-2xl font-bold text-[#DFD1FC]">
+            <div className="grid size-full place-items-center bg-[radial-gradient(ellipse_at_center,rgba(139,60,214,0.15),transparent_70%)] px-6 text-center text-2xl font-semibold tracking-tight text-[#DFD1FC]">
               {title}
             </div>
           )}
 
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-transparent via-30% to-black/15" />
+          {/* Static cinematic overlay */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),transparent_20%,transparent_72%,rgba(0,0,0,0.20))]"
+          />
 
-          {/* <span className="pointer-events-none absolute left-3 top-3 z-[4] rounded-md border border-white/20 bg-[#0c0b0f]/65 px-2.5 py-2 text-[8px] font-semibold tracking-[0.15em] text-white/90 backdrop-blur-xl sm:left-4 sm:top-4 sm:text-[9px]">
-            {featuredText || "PROJECT / PORTFOLIO"}
-          </span> */}
+          {/* Media glass rim */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-1px_0_rgba(0,0,0,0.3)]"
+          />
+
+          {featuredText && (
+            <div className="pointer-events-none absolute left-3 top-3 z-[4] sm:left-4 sm:top-4">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.15] bg-[#100d15]/65 px-3 py-1.5 text-[9px] font-semibold tracking-[0.12em] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+                <span className="size-1.5 rounded-full bg-[#C4A1FF] shadow-[0_0_8px_rgba(196,161,255,0.45)]" />
+                {featuredText}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Project information */}
       <div
-        className={`project-content min-w-0 py-1 md:py-2 ${
+        className={`project-content relative z-[1] min-w-0 py-1 md:py-2 ${
           flipData ? "md:order-1" : ""
         }`}
       >
-        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-          <h3 className="min-w-0 break-words text-lg font-semibold leading-tight tracking-[-0.045em] text-white">
-            <a
-              className="text-white transition-colors duration-200 hover:text-[#DFD1FC]"
-              href={link || undefined}
-              target={link ? "_blank" : undefined}
-              rel={link ? "noopener noreferrer" : undefined}
-            >
-              {title}
-            </a>
-          </h3>
+        {/* Heading and external links */}
+        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-[#C5A6F5]/65">
+              Selected work
+            </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="m-0 break-words text-xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-[23px]">
+              {link ? (
+                <a
+                  className="text-white"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {title}
+                </a>
+              ) : (
+                title
+              )}
+            </h3>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
             {playstoreLink && (
-              <a
-                className={actionClass}
+              <GlassAction
                 href={playstoreLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${title} on Google Play`}
+                label={`${title} on Google Play`}
                 title="Google Play"
               >
                 <FaGooglePlay size={15} />
-              </a>
+              </GlassAction>
             )}
 
             {appStoreLink && (
-              <a
-                className={actionClass}
+              <GlassAction
                 href={appStoreLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${title} on the App Store`}
+                label={`${title} on the App Store`}
                 title="App Store"
               >
-                <FaAppStore size={20} />
-              </a>
+                <FaAppStore size={19} />
+              </GlassAction>
             )}
 
             {additionalPortalLinks.map((portal, index) => {
               const Icon = portalIconMap[portal.iconName] || FaExternalLinkAlt;
 
-              if (!portal.link) return null;
-
-              return (
-                <a
+              return portal.link ? (
+                <GlassAction
                   key={`${portal.iconName}-${index}`}
-                  className={actionClass}
                   href={portal.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={portal.label || `${title} portal ${index + 1}`}
+                  label={portal.label || `${title} portal ${index + 1}`}
                   title={portal.label || portal.iconName}
                 >
                   <Icon size={17} />
-                </a>
-              );
+                </GlassAction>
+              ) : null;
             })}
+          </div>
 
-            {link && (
+          {/* Primary project link */}
+          {link && (
+            <div className="">
               <a
-                className="inline-flex h-fit items-center justify-center rounded-lg border border-[#8B3CD6]/45 bg-[#6F2AA5]/15 px-3 py-2 text-xs font-semibold text-[#DFD1FC] transition duration-200 hover:-translate-y-0.5 hover:border-[#DFD1FC]/70 hover:bg-[#8B3CD6]/25 motion-reduce:transition-none"
+                className="inline-flex min-h-10 items-center gap-3 rounded-xl border border-[#C5A6F5]/30 bg-[linear-gradient(135deg,rgba(139,60,214,0.22),rgba(139,60,214,0.07))] px-4 py-2.5 text-xs font-semibold text-[#E8D9FF] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_5px_14px_rgba(0,0,0,0.15)]"
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Explore project
+                <FaExternalLinkAlt size={10} />
               </a>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
-        <div className="relative rounded-r-xl border border-white/[0.09] border-l-2 border-l-[#8B3CD6]/80 bg-white/[0.035] p-4">
+        {/* Description glass panel */}
+        <div className="relative overflow-hidden rounded-xl border border-white/[0.105] bg-[linear-gradient(135deg,rgba(255,255,255,0.055),rgba(255,255,255,0.018)_60%,rgba(139,60,214,0.045))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.055),0_8px_20px_rgba(0,0,0,0.12)] sm:p-5">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-3 left-0 top-3 w-[2px] rounded-full bg-gradient-to-b from-[#D7BCFF]/75 via-[#8B3CD6]/55 to-transparent"
+          />
+
           {descriptions.length === 1 ? (
-            <p className="m-0 text-[13px] leading-[1.8] text-[#f2eff7]/80 md:text-sm md:leading-[1.85]">
+            <p className="m-0 pl-1 text-[13px] leading-[1.85] text-[#EAE4F1]/80 sm:text-sm">
               {descriptions[0]}
             </p>
           ) : descriptions.length > 1 ? (
-            <ul className="flex flex-col gap-3">
+            <ul className="m-0 flex list-none flex-col gap-3 p-0 pl-1">
               {descriptions.map((item, index) => (
                 <li
                   key={`${title}-description-${index}`}
-                  className="relative pl-5 text-[13px] leading-7 text-white/75 sm:text-sm"
+                  className="relative pl-5 text-[13px] leading-[1.85] text-[#EAE4F1]/80 sm:text-sm"
                 >
-                  <span className="absolute left-0 top-[11px] size-1.5 rounded-full bg-[#b497cf] shadow-[0_0_10px_rgba(180,151,207,0.4)]" />
+                  <span className="absolute left-0 top-[9px] size-1.5 rounded-full bg-[#C5A6F5]/90" />
                   {item}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-white/50">
+            <p className="m-0 pl-1 text-sm text-white/45">
               Project details coming soon.
             </p>
           )}
         </div>
 
+        {/* Technology stack */}
         {technologies.length > 0 && (
-          <div className="mt-[22px] md:mt-[27px]">
-            <span className="mb-3 block text-[9px] font-bold tracking-[0.2em] text-white/45">
-              BUILT WITH
-            </span>
+          <div className="mt-6 md:mt-7">
+            <div className="mb-3 flex items-center gap-3">
+              <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/45">
+                Built with
+              </span>
+              <span className="h-px flex-1 bg-gradient-to-r from-white/[0.12] to-transparent" />
+            </div>
 
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-md border border-[#8B3CD6]/25 bg-[#6F2AA5]/10 px-2.5 py-[7px] text-[11px] font-medium leading-snug text-[#DFD1FC] transition-colors duration-200 hover:border-[#8B3CD6]/60 hover:bg-[#8B3CD6]/20 hover:text-white motion-reduce:transition-none"
+                  className="inline-flex items-center rounded-lg border border-[#C5A6F5]/20 bg-[linear-gradient(145deg,rgba(139,60,214,0.12),rgba(255,255,255,0.025))] px-3 py-2 text-[11px] font-medium leading-snug text-[#DCCBF6]/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.055)]"
                 >
                   {tech}
                 </span>

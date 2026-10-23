@@ -104,7 +104,7 @@ function App() {
   const iconColor = sectionColors[activeSection] || "#2a363b";
 
   const [currActive, setCurrActive] = useState(
-    window.location.hash.split("#/")[1]
+    window.location.hash.split("#/")[1],
   );
 
   useEffect(() => {
@@ -136,12 +136,9 @@ function App() {
     <div className={darkMode ? "app_dark" : "app"}>
       {/* <Navbar /> */}
       <Router>
-        {/* <Navbar /> */}
         <SideBars setColor={setColor} />
       </Router>
-
       <Home setColor={setColor} />
-
       <Projects setColor={setColor} />
       <Skills setColor={setColor} />
       {/* <WorkExperiences setColor={setColor} /> */}

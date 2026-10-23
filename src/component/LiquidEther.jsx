@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 const PIXEL_BUDGET = 2.4e6;
 const MAX_CELLS = 140000;
-const PRESSURE_STEPS = 32;
+const PRESSURE_STEPS = isMobile ? 16 : 32;
 const PALETTE_SIZE = 256;
 
 const VERTEX = `#version 300 es
@@ -197,13 +198,13 @@ const parseColor = (value) => {
         ? hex[1].replace(/./g, (digit) => digit + digit)
         : hex[1];
     return [0, 2, 4].map(
-      (index) => parseInt(full.slice(index, index + 2), 16) / 255
+      (index) => parseInt(full.slice(index, index + 2), 16) / 255,
     );
   }
   const rgb = /^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(text);
   if (rgb)
     return [rgb[1], rgb[2], rgb[3]].map((channel) =>
-      clamp(parseFloat(channel) / 255, 0, 1)
+      clamp(parseFloat(channel) / 255, 0, 1),
     );
   return null;
 };
@@ -226,7 +227,7 @@ const buildPalette = (colors) => {
     const t = clamp(
       (index / (PALETTE_SIZE - 1)) * values.length - 0.5,
       0,
-      values.length - 1
+      values.length - 1,
     );
     const from = Math.min(Math.floor(t), Math.max(values.length - 2, 0));
     const to = Math.min(from + 1, values.length - 1);
@@ -351,14 +352,27 @@ const LiquidEther = ({
       antialias: false,
       depth: false,
       stencil: false,
-      powerPreference: "high-performance",
+      powerPreference: "default",
     });
-    if (!gl) return;
-    if (
-      !gl.getExtension("EXT_color_buffer_float") &&
-      !gl.getExtension("EXT_color_buffer_half_float")
-    )
+
+    if (!gl) {
+      console.error("[LiquidEther] WebGL2 unavailable on this device.");
       return;
+    }
+
+    const floatExtension = gl.getExtension("EXT_color_buffer_float");
+
+    if (!floatExtension) {
+      console.error(
+        "[LiquidEther] Floating-point render targets are unsupported.",
+      );
+      return;
+    }
+
+    console.info("[LiquidEther] WebGL2 initialized", {
+      renderer: gl.getParameter(gl.RENDERER),
+      version: gl.getParameter(gl.VERSION),
+    });
 
     const programs = {
       splat: link(gl, SPLAT),
@@ -369,10 +383,17 @@ const LiquidEther = ({
       advect: link(gl, ADVECT),
       display: link(gl, DISPLAY),
     };
-    if (Object.values(programs).some((entry) => !entry)) return;
+    const failedProgram = Object.entries(programs).find(([, entry]) => !entry);
+
+    if (failedProgram) {
+      console.error(
+        `[LiquidEther] Failed to initialize shader: ${failedProgram[0]}`,
+      );
+      return;
+    }
 
     const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
     const vao = gl.createVertexArray();
     const size = { width: 1, height: 1 };
@@ -432,7 +453,7 @@ const LiquidEther = ({
         0,
         gl.RGBA,
         gl.UNSIGNED_BYTE,
-        buildPalette(s.colors)
+        buildPalette(s.colors),
       );
     };
 
@@ -448,7 +469,7 @@ const LiquidEther = ({
         0,
         channels === 2 ? gl.RG : gl.RED,
         gl.HALF_FLOAT,
-        null
+        null,
       );
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -461,10 +482,31 @@ const LiquidEther = ({
         gl.COLOR_ATTACHMENT0,
         gl.TEXTURE_2D,
         texture,
-        0
+        0,
       );
+
+      const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+
+      if (status !== gl.FRAMEBUFFER_COMPLETE) {
+        console.error(
+          "[LiquidEther] Incomplete framebuffer:",
+          status,
+          "Size:",
+          width,
+          height,
+          "Channels:",
+          channels,
+        );
+
+        gl.deleteFramebuffer(framebuffer);
+        gl.deleteTexture(texture);
+
+        throw new Error(`LiquidEther framebuffer incomplete: ${status}`);
+      }
+
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
+
       return { texture, framebuffer };
     };
 
@@ -484,7 +526,7 @@ const LiquidEther = ({
       const ratio = Math.min(
         window.devicePixelRatio || 1,
         s.maxRatio,
-        Math.sqrt(PIXEL_BUDGET / (cssWidth * cssHeight))
+        Math.sqrt(PIXEL_BUDGET / (cssWidth * cssHeight)),
       );
       const width = Math.max(1, Math.round(cssWidth * ratio));
       const height = Math.max(1, Math.round(cssHeight * ratio));
@@ -494,12 +536,13 @@ const LiquidEther = ({
       }
       size.width = cssWidth;
       size.height = cssHeight;
-      const base = s.resolution * 0.5;
+
+      const base = s.resolution * (isMobile ? 0.3 : 0.5);
       const scale =
         base *
         Math.min(
           1,
-          Math.sqrt(MAX_CELLS / (cssWidth * cssHeight * base * base))
+          Math.sqrt(MAX_CELLS / (cssWidth * cssHeight * base * base)),
         );
       const gridWidth = clamp(Math.round(cssWidth * scale), 16, 1024);
       const gridHeight = clamp(Math.round(cssHeight * scale), 16, 1024);
@@ -592,7 +635,7 @@ const LiquidEther = ({
         gl.uniform2f(u.uSimSize, grid.width, grid.height);
         gl.uniform1f(
           u.uSpeedScale,
-          (1.25 * s.intensity) / (0.84 * Math.max(size.width, size.height))
+          (1.25 * s.intensity) / (0.84 * Math.max(size.width, size.height)),
         );
         gl.uniform1f(u.uLight, s.light ? 1 : 0);
         gl.uniform4f(
@@ -600,7 +643,7 @@ const LiquidEther = ({
           s.background[0],
           s.background[1],
           s.background[2],
-          s.background[3]
+          s.background[3],
         );
       });
     };
@@ -686,7 +729,7 @@ const LiquidEther = ({
           [pointer.x, pointer.y],
           span,
           (s.force / 20) * 0.15 * pace,
-          s.radius
+          s.radius,
         );
         pointer.fromX = pointer.x;
         pointer.fromY = pointer.y;
@@ -856,7 +899,7 @@ const LiquidEther = ({
         gl.deleteTexture(paletteTexture);
         gl.deleteVertexArray(vao);
         Object.values(programs).forEach((entry) =>
-          gl.deleteProgram(entry.program)
+          gl.deleteProgram(entry.program),
         );
       }
     };

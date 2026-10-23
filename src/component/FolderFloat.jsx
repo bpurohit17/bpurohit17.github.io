@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import Matter from "matter-js";
 const { Bodies, Body, Composite, Engine } = Matter;
@@ -22,6 +23,23 @@ const GAP = 12;
 const ROW = 52;
 const DRAG_MIN = 4;
 const ZONE_PAD = 8;
+
+const MOBILE_QUERY = "(max-width: 768px)";
+
+function subscribeToMobile(callback) {
+  const media = window.matchMedia(MOBILE_QUERY);
+  media.addEventListener("change", callback);
+
+  return () => media.removeEventListener("change", callback);
+}
+
+function getMobileSnapshot() {
+  return window.matchMedia(MOBILE_QUERY).matches;
+}
+
+function getMobileServerSnapshot() {
+  return false;
+}
 
 const jitter = (i) => {
   const x = Math.sin(i * 12.9898 + 4.1414) * 43758.5453;
@@ -117,7 +135,7 @@ export default function FolderFloat({
   const popTimer = useRef(undefined);
   const liveTimer = useRef(undefined);
   const list = items.map((item) =>
-    typeof item === "string" ? { label: item, value: item } : item
+    typeof item === "string" ? { label: item, value: item } : item,
   );
   const n = list.length;
   const sub = sublabel || `${n} ${n === 1 ? "note" : "notes"}`;
@@ -134,7 +152,7 @@ export default function FolderFloat({
         prev.length === next.length &&
         prev.every((s, i) => s.w === next[i].w && s.h === next[i].h)
           ? prev
-          : next
+          : next,
       );
     };
     measure();
@@ -154,7 +172,7 @@ export default function FolderFloat({
         el.style.setProperty("--x", `${b.position.x.toFixed(1)}px`);
         el.style.setProperty(
           "--y",
-          `${(b.position.y - w.sizes[i].h / 2).toFixed(1)}px`
+          `${(b.position.y - w.sizes[i].h / 2).toFixed(1)}px`,
         );
       });
       Composite.clear(w.engine.world, false, true);
@@ -205,7 +223,7 @@ export default function FolderFloat({
         T,
         {
           isStatic: true,
-        }
+        },
       ),
       Bodies.rectangle(
         (zone.left + zone.right) / 2,
@@ -214,7 +232,7 @@ export default function FolderFloat({
         T,
         {
           isStatic: true,
-        }
+        },
       ),
       Bodies.rectangle(
         zone.left - T / 2,
@@ -223,7 +241,7 @@ export default function FolderFloat({
         zone.bottom - zone.top + 2 * T,
         {
           isStatic: true,
-        }
+        },
       ),
       Bodies.rectangle(
         zone.right + T / 2,
@@ -232,7 +250,7 @@ export default function FolderFloat({
         zone.bottom - zone.top + 2 * T,
         {
           isStatic: true,
-        }
+        },
       ),
     ];
     Composite.add(engine.world, [...w.bodies, ...walls]);
@@ -262,7 +280,7 @@ export default function FolderFloat({
         el.style.setProperty("--x", `${b.position.x.toFixed(1)}px`);
         el.style.setProperty(
           "--y",
-          `${(b.position.y - s.sizes[i].h / 2).toFixed(1)}px`
+          `${(b.position.y - s.sizes[i].h / 2).toFixed(1)}px`,
         );
       });
       s.raf = requestAnimationFrame(tick);
@@ -280,7 +298,7 @@ export default function FolderFloat({
         return next;
       });
     },
-    [stopPhysics]
+    [stopPhysics],
   );
 
   useEffect(() => {
@@ -292,7 +310,7 @@ export default function FolderFloat({
     }
     liveTimer.current = setTimeout(
       startPhysics,
-      openDuration + (n - 1) * stagger + 80
+      openDuration + (n - 1) * stagger + 80,
     );
     return () => clearTimeout(liveTimer.current);
   }, [open, physics, openDuration, stagger, n, startPhysics, stopPhysics]);
@@ -312,7 +330,7 @@ export default function FolderFloat({
       clearTimeout(popTimer.current);
       stopPhysics();
     },
-    [stopPhysics]
+    [stopPhysics],
   );
 
   const pick = (item, i) => {
@@ -382,7 +400,13 @@ export default function FolderFloat({
     if (!d.moved && e.type === "pointerup") pick(item, i);
   };
 
-  const hover = trigger === "hover";
+  const isMobile = useSyncExternalStore(
+    subscribeToMobile,
+    getMobileSnapshot,
+    getMobileServerSnapshot,
+  );
+
+  const hover = trigger === "hover" && !isMobile;
 
   return (
     <div
@@ -428,7 +452,7 @@ export default function FolderFloat({
         "--ff-tab": "14px",
         "--ff-ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
         "--ff-spring": `cubic-bezier(0.34, ${(1 + bounce * 1.9).toFixed(
-          2
+          2,
         )}, 0.64, 1)`,
       }}
     >
