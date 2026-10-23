@@ -146,12 +146,11 @@ const ProjectItem = ({
 
       {/* Media frame */}
       <div className="project-visual relative z-[1] min-w-0">
-        <div className="relative isolate aspect-[1/1.2] overflow-hidden rounded-2xl border border-white/[0.14] bg-[#100d15] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-12px_25px_rgba(0,0,0,0.2),0_12px_28px_rgba(0,0,0,0.35),0_28px_55px_-35px_rgba(139,60,214,0.4)] md:aspect-[1.68/1]">
+        <div className="relative isolate aspect-[4/3] w-full min-w-0 overflow-hidden rounded-xl border border-white/10 bg-[#100d15] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] sm:rounded-2xl md:aspect-[1.4/1] lg:aspect-[1.55/1] xl:aspect-[1.68/1]">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-[12%] -z-10 bg-[#8B3CD6]/25 blur-[45px]"
           />
-
           {sliderItems.length > 0 ? (
             <MorphSlider
               items={sliderItems}
@@ -180,19 +179,16 @@ const ProjectItem = ({
               {title}
             </div>
           )}
-
           {/* Static cinematic overlay */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),transparent_20%,transparent_72%,rgba(0,0,0,0.20))]"
           />
-
           {/* Media glass rim */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-1px_0_rgba(0,0,0,0.3)]"
           />
-
           {featuredText && (
             <div className="pointer-events-none absolute left-3 top-3 z-[4] sm:left-4 sm:top-4">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.15] bg-[#100d15]/65 px-3 py-1.5 text-[9px] font-semibold tracking-[0.12em] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.2)] backdrop-blur-xl">
@@ -211,7 +207,7 @@ const ProjectItem = ({
         }`}
       >
         {/* Heading and external links */}
-        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+        <div className="mb-5 flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <div className="min-w-0 flex-1">
             <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-[#C5A6F5]/65">
               Selected work
@@ -232,8 +228,7 @@ const ProjectItem = ({
               )}
             </h3>
           </div>
-
-          <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
             {playstoreLink && (
               <GlassAction
                 href={playstoreLink}
@@ -243,7 +238,6 @@ const ProjectItem = ({
                 <FaGooglePlay size={15} />
               </GlassAction>
             )}
-
             {appStoreLink && (
               <GlassAction
                 href={appStoreLink}
@@ -253,7 +247,6 @@ const ProjectItem = ({
                 <FaAppStore size={19} />
               </GlassAction>
             )}
-
             {additionalPortalLinks.map((portal, index) => {
               const Icon = portalIconMap[portal.iconName] || FaExternalLinkAlt;
 
@@ -268,22 +261,21 @@ const ProjectItem = ({
                 </GlassAction>
               ) : null;
             })}
+            {/* Primary project link */}
+            {link && (
+              <div className="">
+                <a
+                  className="inline-flex min-h-10 items-center gap-3 rounded-xl border border-[#C5A6F5]/30 bg-[linear-gradient(135deg,rgba(139,60,214,0.22),rgba(139,60,214,0.07))] px-4 py-2.5 text-xs font-semibold text-[#E8D9FF] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_5px_14px_rgba(0,0,0,0.15)]"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explore project
+                  <FaExternalLinkAlt size={10} />
+                </a>
+              </div>
+            )}
           </div>
-
-          {/* Primary project link */}
-          {link && (
-            <div className="">
-              <a
-                className="inline-flex min-h-10 items-center gap-3 rounded-xl border border-[#C5A6F5]/30 bg-[linear-gradient(135deg,rgba(139,60,214,0.22),rgba(139,60,214,0.07))] px-4 py-2.5 text-xs font-semibold text-[#E8D9FF] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_5px_14px_rgba(0,0,0,0.15)]"
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Explore project
-                <FaExternalLinkAlt size={10} />
-              </a>
-            </div>
-          )}
         </div>
 
         {/* Description glass panel */}
