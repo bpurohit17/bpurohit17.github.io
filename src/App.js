@@ -98,26 +98,10 @@ function ScrollProgressAndArrow({ progressColor = "#00adb5" }) {
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  const [color, setColor] = useState("#ffffff");
+  const [color, setColor] = useState("#000000");
   const [activeSection, setActiveSection] = useState("");
 
   const iconColor = sectionColors[activeSection] || "#2a363b";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-
-      if (y > 250 && y < 2800) {
-        // if (window.scrollY > 200) {
-        setDarkMode(true);
-      } else {
-        setDarkMode(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const [currActive, setCurrActive] = useState(
     window.location.hash.split("#/")[1]
@@ -162,7 +146,7 @@ function App() {
       <Skills setColor={setColor} />
       {/* <WorkExperiences setColor={setColor} /> */}
       <Contact setColor={setColor} />
-      <div
+      {/* <div
         style={{
           backgroundColor: "#434343",
           textAlign: "center",
@@ -181,9 +165,9 @@ function App() {
         >
           Muhammad Aamir's Portfolio
         </a>
-      </div>
+      </div> */}
       <ScrollProgressAndArrow progressColor={iconColor} />
-      <MaskedCursor />
+      {/* <MaskedCursor /> */}
     </div>
   );
 }

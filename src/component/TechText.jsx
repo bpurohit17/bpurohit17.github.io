@@ -42,7 +42,7 @@ const TechText = ({
   letterSpacing = -0.05,
   color = "currentColor",
   accentColor = "currentColor",
-  align = "center",
+  align = "left",
   reach = 200,
   softness = 0.7,
   dashLength = 4,
@@ -231,19 +231,28 @@ const TechText = ({
       const probe = scratchCtx;
       setFont(probe, s, s.fontSize);
       let m = probe.measureText(s.text);
+      const horizontalPadding = Math.min(16, width * 0.02);
+      const verticalPadding = Math.min(8, height * 0.08);
+
       const fit = Math.min(
         1,
-        (width * 0.9) /
-          Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
-        (height * 0.66) /
-          Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1)
+        Math.max(
+          0.01,
+          (width - horizontalPadding * 2) /
+            Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1)
+        ),
+        Math.max(
+          0.01,
+          (height - verticalPadding * 2) /
+            Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1)
+        )
       );
       const size = s.fontSize * fit;
       setFont(probe, s, size);
       m = probe.measureText(s.text);
       const inkWidth = m.actualBoundingBoxLeft + m.actualBoundingBoxRight;
       const inkHeight = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-      const margin = width * 0.05;
+      const margin = 0;
       const start =
         s.align === "left"
           ? margin
@@ -1137,12 +1146,12 @@ const TechText = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-48 touch-pan-y select-none text-left ${className}`.trim()}
+      className={`relative h-16 w-full touch-pan-y select-none text-left sm:h-28 md:h-32 lg:h-36 ${className}`.trim()}
       style={style}
       role="img"
       aria-label={text}
     >
-      <canvas ref={canvasRef} className="block w-full h-48" />
+      <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   );
 };
