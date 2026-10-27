@@ -55,8 +55,7 @@ const Contact = ({ setColor }) => {
           <h2 className="mb-6 font-['Quicksand',sans-serif] text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.1] tracking-[-0.04em] text-white max-md:text-[clamp(2.2rem,9vw,3.5rem)] max-md:tracking-[-0.025em] max-sm:text-[2.3rem]">
             Let's Work Together
           </h2>
-
-          <p className="mb-8 font-['Quicksand',sans-serif] text-base font-medium leading-[1.8] text-white max-md:text-[0.95rem]">
+          <p className="mb-8 font-['Quicksand',sans-serif] text-base leading-[1.8] text-white max-md:text-[0.95rem]">
             I'm open to new opportunities, especially ambitious projects. My
             inbox is always open, whether you have a question, a project idea,
             or just want to say hi. I'll do my best to get back to you!

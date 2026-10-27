@@ -1,21 +1,15 @@
 import React, { useEffect } from "react";
-import "./projects.css";
 import ProjectItem from "./projectItem";
 import { useInView } from "react-intersection-observer";
 import Lightfall from "../../component/Lightfall.jsx";
 import ScrollReveal from "../../component/ScrollReveal.jsx";
 import FlexCarousel from "../../component/FlexCarousel.jsx";
+import ScrollStack, { ScrollStackItem } from "../../component/ScrollStack.jsx";
 
 const Projects = ({ setColor }) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
-
-  useEffect(() => {
-    if (inView && setColor) {
-      setColor("#fff7ae");
-    }
-  }, [inView, setColor]);
 
   const projects = [
     {
@@ -208,38 +202,8 @@ const Projects = ({ setColor }) => {
       ref={ref}
       className="relative isolate min-h-screen w-full overflow-hidden bg-black text-white"
     >
-      {/* Animated background restricted to Projects */}
-      {/* <div className="projects-background" aria-hidden="true">
-        <Lightfall
-          colors={["#dfd1fc", "#b497cf", "#8b3cd6"]}
-          backgroundColor="#000000"
-          speed={0.85}
-          streakCount={2}
-          streakWidth={0.6}
-          twinkle={0.3}
-          backgroundGlow={0.1}
-          headGlow={0.55}
-          bloom={0.3}
-          mouseInteraction={true}
-          holdToWarp={true}
-          intro={true}
-          streakLength={1}
-          density={0.6}
-          glow={0.75}
-          depth={0.55}
-          zoom={2}
-          mouseStrength={0.4}
-          mouseRadius={0.25}
-          lens={0.65}
-          fade={0.5}
-          lightMode={false}
-          className="h-full w-full"
-        />
-      </div> */}
-
       <div className="relative z-10 ">
         <FlexCarousel
-          // items={items}
           preset="liquid"
           intro="rise"
           cardHeight={0.5}
@@ -266,9 +230,9 @@ const Projects = ({ setColor }) => {
       </div>
 
       {/* Projects content above the background */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* Section heading */}
-        <div className="mb-16 text-center">
+        <div className="text-center">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-purple-300">
             My Portfolio
           </p>
@@ -287,14 +251,42 @@ const Projects = ({ setColor }) => {
             projects.
           </p>
         </div>
-
-        {/* Project cards */}
-        <div className="relative z-10 space-y-16 sm:space-y-24">
-          {projects.map((project) => (
-            <div key={project.title} className="relative z-10">
-              <ProjectItem {...project} />
-            </div>
-          ))}
+        {/* <div style={{ height: 850 }}>
+          <ScrollStack
+            className="w-full"
+            itemDistance={100}
+            itemStackDistance={28}
+            stackPosition="12%"
+            itemScale={0.025}
+            baseScale={0.92}
+            dimAmount={0.08}
+            blurAmount={0}
+            tiltAmount={0}
+            rotationAmount={0}
+            holdDistance={350}
+            smoothScroll={false}
+            snap={false}
+          >
+            {projects.map((project) => (
+              <ScrollStackItem
+                key={project.title}
+                itemClassName="w-full cursor-pointer"
+              >
+                <ProjectItem {...project} />
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </div> */}
+        <div style={{ height: 850 }}>
+          <ScrollStack>
+            {projects.map((project) => (
+              <ScrollStackItem>
+                <div key={project.title} className="">
+                  <ProjectItem {...project} />{" "}
+                </div>
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
         </div>
       </div>
     </section>

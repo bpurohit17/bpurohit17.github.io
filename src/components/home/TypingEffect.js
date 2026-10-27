@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./TypingEffect.css";
 
 const TypingEffect = () => {
   const strings = [
@@ -41,6 +40,7 @@ const TypingEffect = () => {
               scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
           )
           .join("");
+
         timeout = setTimeout(() => {
           setDisplayText(scrambled);
           setScrambleCount(scrambleCount + 1);
@@ -53,6 +53,7 @@ const TypingEffect = () => {
       }
     } else if (step === "next") {
       const nextString = strings[(currentIndex + 1) % strings.length];
+
       if (charIndex <= nextString.length) {
         const partial = nextString.slice(0, charIndex);
         const rest = nextString
@@ -63,6 +64,7 @@ const TypingEffect = () => {
               scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
           )
           .join("");
+
         timeout = setTimeout(() => {
           setDisplayText(partial + rest);
           setCharIndex(charIndex + 1);
@@ -78,16 +80,7 @@ const TypingEffect = () => {
   }, [step, charIndex, scrambleCount]);
 
   return (
-    <div
-      className="typing-text"
-      // style={{
-      //   fontSize: "40px",
-      //   lineHeight: "60px",
-      //   fontWeight: "600",
-      //   color: "#cf4647", // cf4647 5F41B2
-      //   paddingBottom: "20px",
-      // }}
-    >
+    <div className="text-md font-semibold leading-relaxed text-[#6b3cd6] sm:text-xl sm:leading-normal md:text-2xl lg:text-4xl">
       {displayText}
     </div>
   );

@@ -24,6 +24,16 @@ body {
   /* width: 100vw; */
 }
 
+/* Hide scrollbar while preserving scroll functionality */
+.scroll-stack-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer / legacy Edge */
+}
+
+.scroll-stack-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 ::selection {
   background: #f96353;
   color: #ffffff;

@@ -61,6 +61,7 @@ const TechText = ({
   intro = "none",
   introDuration = 2,
   guides = false,
+  respectReducedMotion = true,
   className = "",
   style,
 }) => {
@@ -97,6 +98,7 @@ const TechText = ({
       intro,
       introDuration,
       guides,
+      respectReducedMotion,
     };
     wakeRef.current();
   });
@@ -109,9 +111,11 @@ const TechText = ({
     const scratchCtx = scratch.getContext("2d");
     if (!container || !canvas || !ctx || !scratchCtx) return undefined;
 
-    const reducedMotion = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    )?.matches;
+    const motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const isReduced = () =>
+      settingsRef.current?.respectReducedMotion !== false &&
+      !!motionQuery?.matches;
+
     let width = 1;
     let height = 1;
     let dpr = 1;
@@ -772,8 +776,7 @@ const TechText = ({
         introKind = s.intro;
         introClock = 0;
       }
-      const introOn =
-        introKind !== "none" && !reducedMotion && glyphs.length > 0;
+      const introOn = introKind !== "none" && !isReduced() && glyphs.length > 0;
       if (introOn && fontsReady) introClock += dt;
       const progress = introOn
         ? clamp01((introClock - INTRO_DELAY) / Math.max(0.3, s.introDuration))
@@ -783,7 +786,7 @@ const TechText = ({
       const sweeping =
         !introducing &&
         s.sweep &&
-        !reducedMotion &&
+        !isReduced() &&
         !pointer.inside &&
         dragging < 0;
       if (sweeping) clock += dt * s.speed;
@@ -1077,11 +1080,15 @@ const TechText = ({
           e.clientY >= rect.top &&
           e.clientY <= rect.bottom;
       }
+
+      // touch/pen has no hover, so release the lens when the finger lifts or the gesture is cancelled
+      if (e.pointerType !== "mouse") pointer.inside = false;
+
       if (
         e.type === "pointerup" &&
         press.index >= 0 &&
         settingsRef.current?.clickKick &&
-        !reducedMotion &&
+        !isReduced() &&
         performance.now() - press.time < 450
       ) {
         const rect = container.getBoundingClientRect();
@@ -1146,7 +1153,7 @@ const TechText = ({
   return (
     <div
       ref={containerRef}
-      className={`relative h-16 w-full touch-pan-y select-none text-left sm:h-28 md:h-32 lg:h-36 ${className}`.trim()}
+      className={`relative h-20 w-full touch-pan-y select-none text-left sm:h-28 md:h-32 lg:h-36 ${className}`.trim()}
       style={style}
       role="img"
       aria-label={text}
