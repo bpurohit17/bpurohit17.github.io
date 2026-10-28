@@ -13,138 +13,32 @@ const Projects = ({ setColor }) => {
 
   const projects = [
     {
-      title: "Bulko App",
+      title: "JLDC",
       description: [
-        "Bulko is a modern grocery delivery app that brings fresh produce, pantry staples, and household items directly to customers' doors. It features a user-friendly interface, secure authentication, smart search, seamless cart management, and real-time order tracking — all designed to make grocery shopping fast and convenient.",
+        "JLDC is a digital platform for Jakob's Legacy Data Centers, presenting its data center infrastructure and services through a professional web experience designed to communicate the company's offerings, establish its digital presence, and provide visitors with relevant business information.",
+        "Developed a responsive website with a structured interface and cohesive visual design, enabling visitors to explore the company's services, understand its infrastructure-focused offerings, and navigate key business information through an intuitive browsing experience.",
       ],
-      techStack: "Flutter | Hybrid Mobile App | Android | iOS",
-      imageUrl: `${process.env.PUBLIC_URL}/images/bulko-img.png`,
+      techStack: "React JS | Tailwind CSS",
       flipData: true,
-      link: "https://bulko.in/",
-      playstoreLink:
-        "https://play.google.com/store/apps/details?id=com.lookatclay.bulko.user&pli=1",
-    },
-    {
-      title: "Green Force App",
-      description: [
-        "Green Force is a platform that connects solar companies and independent surveyors. It provides a technology-enabled service for solar site surveys, which are essential for evaluating rooftop or ground-mounted solar panel installations.",
-      ],
-      techStack: "Flutter | Hybrid Mobile App | Android | iOS",
-      imageUrl: `${process.env.PUBLIC_URL}/images/tgf-img.png`,
-      link: "https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN",
-      playstoreLink:
-        "https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN",
-      appStoreLink:
-        "https://apps.apple.com/in/developer/team-green-force-inc/id1719754974",
-    },
-    {
-      title: "GWRE Indian Solar Website",
-      description: [
-        "GWRE is a digital platform for a renewable energy platform showcasing solar solutions for residential, commercial, and industrial customers.",
-        "Built dynamic service listings, blog management, and informative content to improve customer engagement",
-        "Integrated an LLM-powered chatbot delivering context-grounded responses to customer queries.",
-        "Developed a dedicated CRM to manage website content, publish blogs, and centralize customer enquiries.",
-      ],
-      techStack: "React JS | Web App | REST API | SQL",
-      // imageUrl: `${process.env.PUBLIC_URL}/videos/gwre_indian_solar_website.mp4`,
-      media: [`${process.env.PUBLIC_URL}/videos/gwre_indian_solar_website.mp4`],
-      flipData: true,
-      link: "https://greenworld-energy.in/",
-      additionalPortalLinks: [
+      link: "https://jldc.co/",
+      media: [
         {
-          link: "https://gwrewebsitebackend.gwrepermit.com/",
-          iconName: "BsWindowDock",
-          label: "GWRE indian solar CRM",
+          src: `${process.env.PUBLIC_URL}/videos/JLDC-final.mp4`,
+          alt: "JLDC",
+          title: "JLDC",
+          type: "video",
           autoplay: false,
         },
       ],
     },
     {
-      title: "GWRE CRM and Training Dashboard",
-      description: [
-        "GWRE CRM and Training Dashboard is a portal for internal business operations, consolidating project intelligence, operational workflows, and structured employee onboarding within a unified system.",
-        "Developed a full-stack platform implementing a timeline-driven dashboard providing granular visibility into daily project insights and operational performance, enabling users to examine the trends across different reporting periods.",
-        "Incorporated in the same, a modular training ecosystem supporting video, PDF, and text-based lessons, comprehensive quizzes, and trainee performance tracking, enabling structured knowledge delivery and detailed monitoring of training progress.",
-      ],
-      techStack: "React JS | Web App | REST API | SQL",
-      flipData: true,
-      link: "https://gwrecrm.gwrepermit.com/",
-      additionalPortalLinks: [
-        {
-          link: "https://gwre-training.gwrepermit.com/",
-          iconName: "BsWindowDock",
-          label: "Training Dashboard",
-        },
-      ],
-      media: [
-        {
-          src: `${process.env.PUBLIC_URL}/videos/gwre_crm_dashboard.mp4`,
-          alt: "GWRE CRM Dashboard",
-          title: "GWRE CRM",
-          type: "video",
-        },
-        {
-          src: `${process.env.PUBLIC_URL}/videos/training_portal.mp4`,
-          alt: "Training Dashboard",
-          title: "GWRE CRM Training Dashboard",
-          type: "video",
-        },
-      ],
-    },
-    // {
-    //   title: "Permit Planset Project",
-    //   description: [
-    //     "Permit is India's first automated platform for generating solar permit plans. It streamlines the traditionally manual 8–12 hour process into an automated, one-hour workflow. It generates ready-to-submit permit documents, including layouts and electrical line diagrams, tailored to local authority requirements.",
-    //   ],
-    //   techStack: "React JS | Web App | REST API | SQL",
-    //   imageUrl: `${process.env.PUBLIC_URL}/images/planset-img.png`,
-    //   flipData: true,
-    //   link: "https://planset.gwrepermit.com/",
-    // },
-    {
-      title: "BioTradX",
-      description: [
-        "A clean-tech B2B marketplace connecting biomass and biofuel suppliers with businesses to enable transparent, sustainable, and efficient green trade.",
-        "Engineered a tiered B2B platform with real-time order management, geolocation-based buyer-seller discovery, and WebSocket-powered price negotiations, improving transaction efficiency by 40%.",
-        "Integrated Firebase Authentication and Firebase Cloud Messaging (FCM) for secure login and real-time notifications, reducing authentication drop-off by 30%.",
-        "Implemented seamless wallet transaction workflows across L1-L3 user tiers and deployed the application to production with zero critical post-launch issues.",
-      ],
-      techStack:
-        "Flutter | Dart | GetX | Firebase | Maps API | WebSocket | Cashfree ",
-      imageUrl: `${process.env.PUBLIC_URL}/images/biotradx-img.png`,
-      media: [
-        {
-          src: `${process.env.PUBLIC_URL}/images/biotradx-img.png`,
-          alt: "BioTradX application preview",
-          title: "BioTradX",
-          type: "image",
-        },
-        {
-          src: `${process.env.PUBLIC_URL}/images/biotradx-screen-2.png`,
-          alt: "BioTradX application screen",
-          title: "Application Screen",
-          type: "image",
-        },
-        {
-          src: `${process.env.PUBLIC_URL}/videos/biotradx-demo.mp4`,
-          alt: "BioTradX app walkthrough",
-          title: "App Demo",
-          type: "video",
-        },
-      ],
-
-      link: "https://devportfolio.biotradx.com/",
-    },
-    {
-      title: "Just About Placements",
+      title: "JAP",
       description: [
         "Just About Placements (JAP) is a global recruitment and offshore workforce platform connecting businesses with skilled talent and streamlining hiring operations.",
         "Developed a full-stack platform featuring a public website and role-based CRM for managing jobs, candidates, blogs, and outsourced recruitment workflows.",
-        "Built recruiter and candidate portals with job requests, approval workflows, advanced search and filtering, and application tracking.",
-        "Implemented SEO metadata management and recruitment dashboards to improve content visibility and provide real-time hiring insights.",
+        "Built recruiter and candidate portals with job requests, approval workflows, advanced search and filtering, and applications tracking with implemented SEO metadata and recruitment dashboards.",
       ],
       techStack: "React JS | Tailwind CSS | ASP.NET Web APIs | SQL Server",
-      // imageUrl: `${process.env.PUBLIC_URL}/images/indian-solar-img.png`,
       media: [
         {
           src: `${process.env.PUBLIC_URL}/videos/JAP_final.mp4`,
@@ -176,21 +70,125 @@ const Projects = ({ setColor }) => {
       ],
     },
     {
-      title: "JLDC",
+      title: "BioTradX",
       description: [
-        "JLDC is a digital platform for Jakob's Legacy Data Centers, presenting its data center infrastructure and services through a professional web experience designed to communicate the company's offerings, establish its digital presence, and provide visitors with relevant business information.",
-        "Developed a responsive website with a structured interface and cohesive visual design, enabling visitors to explore the company's services, understand its infrastructure-focused offerings, and navigate key business information through an intuitive browsing experience.",
+        "A clean-tech B2B marketplace connecting biomass and biofuel suppliers with businesses to enable transparent, sustainable, and efficient green trade.",
+        "Engineered a tiered B2B platform with real-time order management, geolocation-based buyer-seller discovery (Firebase Authenticated), and WebSocket-powered price negotiations, improving transaction efficiency by 40% with real-time notifications using Firebase Cloud Messaging (FCM).",
+        // "Integrated Firebase Authentication and Firebase Cloud Messaging (FCM) for secure login and real-time notifications, reducing authentication drop-off by 30%.",
+        "Implemented seamless wallet transaction workflows across L1-L3 user tiers and deployed the application to production with zero critical post-launch issues.",
       ],
-      techStack: "React JS | Tailwind CSS | SQL",
-      flipData: true,
-      link: "https://jldc.co/",
+      techStack:
+        "Flutter | Dart | GetX | Firebase | Maps API | WebSocket | Cashfree | Java Spring Boot | MySQL | REST API",
+      imageUrl: `${process.env.PUBLIC_URL}/images/biotradx-img.png`,
       media: [
         {
-          src: `${process.env.PUBLIC_URL}/videos/JLDC-final.mp4`,
-          alt: "JLDC",
-          title: "JLDC",
+          src: `${process.env.PUBLIC_URL}/images/biotradx-img.png`,
+          alt: "BioTradX application preview",
+          title: "BioTradX",
+          type: "image",
+        },
+        {
+          src: `${process.env.PUBLIC_URL}/images/biotradx-screen-2.png`,
+          alt: "BioTradX application screen",
+          title: "Application Screen",
+          type: "image",
+        },
+      ],
+      link: "https://biotradx.com/",
+      playstoreLink:
+        "https://play.google.com/store/apps/details?id=com.bioplanet.biotradx",
+      appStoreLink: "https://apps.apple.com/in/app/biotradx/id6754695624",
+      additionalPortalLinks: [
+        {
+          link: "https://webapp.biotradx.com/",
+          iconName: "BsWindowDock",
+          label: "BioTradX Web Portal",
+        },
+      ],
+    },
+    {
+      title: "GWRE Indian Solar Website",
+      description: [
+        "GWRE is a digital platform for a renewable energy platform showcasing solar solutions for residential, commercial, and industrial customers.",
+        "Built dynamic service listings, blog management, and informative content to improve customer engagement",
+        "Integrated an LLM-powered chatbot delivering context-grounded responses to customer queries.",
+        "Developed a dedicated CRM to manage website content, publish blogs, and centralize customer enquiries.",
+      ],
+      techStack: "React JS | REST APIs | SQL Server",
+      // imageUrl: `${process.env.PUBLIC_URL}/videos/gwre_indian_solar_website.mp4`,
+      media: [
+        {
+          src: `${process.env.PUBLIC_URL}/videos/gwre_indian_solar_website.mp4`,
+          alt: "Indian Solar",
+          title: "Indian Solar",
           type: "video",
           autoplay: false,
+        },
+      ],
+      flipData: true,
+      link: "https://greenworld-energy.in/",
+      additionalPortalLinks: [
+        {
+          link: "https://gwrewebsitebackend.gwrepermit.com/",
+          iconName: "BsWindowDock",
+          label: "GWRE indian solar CRM",
+        },
+      ],
+    },
+    {
+      title: "Green Force App",
+      description: [
+        "Green Force is a platform that connects solar companies and independent surveyors. It provides a technology-enabled service for solar site surveys, which are essential for evaluating rooftop or ground-mounted solar panel installations.",
+      ],
+      techStack: "Flutter | Hybrid Mobile App | Android | iOS",
+      imageUrl: `${process.env.PUBLIC_URL}/images/tgf-img.png`,
+      link: "https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN",
+      playstoreLink:
+        "https://play.google.com/store/apps/developer?id=TEAM+GREEN+FORCE+INC.&hl=en_IN",
+      appStoreLink:
+        "https://apps.apple.com/in/developer/team-green-force-inc/id1719754974",
+    },
+    // {
+    //   title: "Bulko App",
+    //   description: [
+    //     "Bulko is a modern grocery delivery app that brings fresh produce, pantry staples, and household items directly to customers' doors. It features a user-friendly interface, secure authentication, smart search, seamless cart management, and real-time order tracking — all designed to make grocery shopping fast and convenient.",
+    //   ],
+    //   techStack: "Flutter | Hybrid Mobile App | Android | iOS",
+    //   imageUrl: `${process.env.PUBLIC_URL}/images/bulko-img.png`,
+    //   flipData: true,
+    //   link: "https://bulko.in/",
+    //   playstoreLink:
+    //     "https://play.google.com/store/apps/details?id=com.lookatclay.bulko.user&pli=1",
+    // },
+    {
+      title: "GWRE CRM and Training Dashboard",
+      description: [
+        "GWRE CRM and Training Dashboard is a portal for internal business operations, consolidating project intelligence, operational workflows, and structured employee onboarding within a unified system.",
+        "Developed a full-stack platform implementing a timeline-driven dashboard providing granular visibility into daily project insights and operational performance, enabling users to examine the trends across different reporting periods.",
+        "Incorporated in the same, a modular training ecosystem supporting video, PDF, and text-based lessons, comprehensive quizzes, and trainee performance tracking, enabling structured knowledge delivery and detailed monitoring of training progress.",
+      ],
+      techStack: "React JS | ASP.NET Web APIs | SQL Server | Tailwind CSS",
+      flipData: true,
+      link: "https://gwrecrm.gwrepermit.com/",
+      additionalPortalLinks: [
+        {
+          link: "https://gwre-training.gwrepermit.com/",
+          iconName: "BsWindowDock",
+          label: "Training Dashboard",
+        },
+      ],
+      media: [
+        {
+          src: `${process.env.PUBLIC_URL}/videos/gwre_crm_dashboard.mp4`,
+          alt: "GWRE CRM Dashboard",
+          title: "GWRE CRM",
+          type: "video",
+        },
+        {
+          src: `${process.env.PUBLIC_URL}/videos/training_portal.mp4`,
+          alt: "Training Dashboard",
+          title: "GWRE CRM Training Dashboard",
+          type: "video",
         },
       ],
     },
@@ -200,7 +198,8 @@ const Projects = ({ setColor }) => {
     <section
       id="projects"
       ref={ref}
-      className="relative isolate min-h-screen w-full overflow-hidden bg-black text-white"
+      className="relative isolate min-h-screen w-full overflow-x-clip bg-black text-white"
+      // className="relative isolate min-h-screen w-full overflow-hidden bg-black text-white"
     >
       <div className="relative z-10 ">
         <FlexCarousel
@@ -233,56 +232,37 @@ const Projects = ({ setColor }) => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* Section heading */}
         <div className="text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-purple-300">
+          <p className="mt-16 mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-purple-300">
             My Portfolio
           </p>
-
           <h2 className="text-3xl font-bold leading-tight sm:text-5xl lg:text-6xl">
             Things I've Worked On,
             <span className="mt-2 block text-purple-300">Some of Them</span>
           </h2>
-
           <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-purple-400" />
-
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
+          <p
+            className="mx-auto max-w-[340px] xs:max-w-full md:max-w-2xl lg:max-w-3xl xl:max-w-4xl
+            px-2 sm:px-4 text-center text-sm leading-6 sm:leading-7 xl:leading-8 text-white/70
+            xs:text-base md:text-lg lg:text-lg xl:text-xl mt-4 xs:mt-5 sm:mt-6 lg:mt-7"
+          >
+            From pixels to prototypes, the skills behind every detail.
+            <br className="hidden sm:block" /> A mix of creative thinking,
+            problem-solving, and hands-on craft, developed through
+            experimentation and shaped by real-world projects.
+          </p>
+          {/* <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
             From pixels to prototypes, the skills behind every detail.
             <br /> A mix of creative thinking, problem-solving, and hands-on
             craft, developed through experimentation and shaped by real-world
             projects.
-          </p>
+          </p> */}
         </div>
-        {/* <div style={{ height: 850 }}>
-          <ScrollStack
-            className="w-full"
-            itemDistance={100}
-            itemStackDistance={28}
-            stackPosition="12%"
-            itemScale={0.025}
-            baseScale={0.92}
-            dimAmount={0.08}
-            blurAmount={0}
-            tiltAmount={0}
-            rotationAmount={0}
-            holdDistance={350}
-            smoothScroll={false}
-            snap={false}
-          >
-            {projects.map((project) => (
-              <ScrollStackItem
-                key={project.title}
-                itemClassName="w-full cursor-pointer"
-              >
-                <ProjectItem {...project} />
-              </ScrollStackItem>
-            ))}
-          </ScrollStack>
-        </div> */}
-        <div style={{ height: 850 }}>
+        <div className="mt-4 md:mt-6 lg:mt-10 h-auto w-full md:h-[850px]">
           <ScrollStack>
             {projects.map((project) => (
               <ScrollStackItem>
                 <div key={project.title} className="">
-                  <ProjectItem {...project} />{" "}
+                  <ProjectItem {...project} />
                 </div>
               </ScrollStackItem>
             ))}

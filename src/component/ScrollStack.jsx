@@ -6,6 +6,7 @@ import {
   isValidElement,
   useLayoutEffect,
   useRef,
+  useState,
 } from "react";
 
 const resolveOffset = (value, size) => {
@@ -46,7 +47,7 @@ const scrollsInside = (node, stop, delta) => {
 
 export const ScrollStackItem = ({ children, itemClassName = "", style }) => (
   <div
-    className={`relative box-border w-full origin-top rounded-[28px] p-10 will-change-transform ${itemClassName}`.trim()}
+    className={`relative w-full origin-top will-change-transform ${itemClassName}`.trim()}
     style={style}
   >
     {children}
@@ -83,6 +84,19 @@ const ScrollStack = ({
   const scheduleRef = useRef(null);
 
   const items = Children.toArray(children);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useLayoutEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+
+    const update = () => setIsMobile(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useLayoutEffect(() => {
     settingsRef.current = {
@@ -124,6 +138,18 @@ const ScrollStack = ({
     const end = endRef.current;
 
     if (!root || !inner || !end) return undefined;
+
+    if (isMobile) {
+      if (inner) {
+        inner.style.paddingTop = "0";
+      }
+
+      if (end) {
+        end.style.height = "0px";
+      }
+
+      return;
+    }
 
     const windowed = useWindowScroll;
     const target = windowed ? window : root;
@@ -639,7 +665,7 @@ const ScrollStack = ({
 
       scheduleRef.current = null;
     };
-  }, [useWindowScroll]);
+  }, [useWindowScroll, isMobile]);
 
   return (
     <div
@@ -647,23 +673,28 @@ const ScrollStack = ({
       // className={`relative w-full ${
       //   useWindowScroll ? "" : "h-full overflow-x-hidden overflow-y-auto"
       // } ${className}`.trim()}
-
-      className={`scroll-stack-container relative w-full ${
-        useWindowScroll ? "" : "h-full overflow-x-hidden overflow-y-auto"
-      } ${className}`.trim()}
+      className={`scroll-stack-container relative w-full overflow-visible md:h-full md:overflow-x-hidden md:overflow-y-auto ${className}`.trim()}
+      // className={`scroll-stack-container relative w-full ${
+      //   useWindowScroll ? "" : "h-full overflow-x-hidden overflow-y-auto"
+      // } ${className}`.trim()}
     >
-      <div ref={innerRef} className="relative px-[clamp(1rem,6%,5rem)]">
+      <div
+        ref={innerRef}
+        className="relative px-3 sm:px-5 md:px-[clamp(1rem,6%,5rem)]"
+      >
         {items.map((child, index) => (
           <Fragment key={isValidElement(child) ? child.key ?? index : index}>
             {index > 0 && <div aria-hidden="true" data-stack-gap="" />}
 
             <div
               data-stack-slot=""
-              className="sticky"
+              className="relative mb-6 md:sticky md:mb-0"
               style={{
-                top: `calc(var(--scroll-stack-top, 15%) + ${
-                  index * itemStackDistance
-                }px)`,
+                top: isMobile
+                  ? "auto"
+                  : `calc(var(--scroll-stack-top, 15%) + ${
+                      index * itemStackDistance
+                    }px)`,
                 zIndex: index + 1,
               }}
             >
@@ -671,36 +702,6 @@ const ScrollStack = ({
             </div>
           </Fragment>
         ))}
-        {/* {items.map((child, index) => {
-          const gap = itemDistance - (items.length - index) * itemStackDistance;
-
-          return (
-            <Fragment key={isValidElement(child) ? child.key ?? index : index}>
-              {index > 0 && (
-                <div
-                  aria-hidden="true"
-                  style={{
-                    height: Math.max(0, gap),
-                    marginTop: Math.min(0, gap),
-                  }}
-                />
-              )}
-              {index > 0 && <div aria-hidden="true" data-stack-gap="" />}
-              <div
-                data-stack-slot=""
-                className="sticky"
-                style={{
-                  top: `calc(var(--scroll-stack-top, 15%) + ${
-                    index * itemStackDistance
-                  }px)`,
-                  zIndex: index + 1,
-                }}
-              >
-                {child}
-              </div>
-            </Fragment>
-          );
-        })} */}
 
         <div ref={endRef} aria-hidden="true" />
       </div>
