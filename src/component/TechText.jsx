@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const LABEL_FONT =
   "10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
@@ -65,6 +65,7 @@ const TechText = ({
   className = "",
   style,
 }) => {
+  const [drawn, setDrawn] = useState(false);
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const settingsRef = useRef(null);
@@ -138,6 +139,7 @@ const TechText = ({
     let introducing = false;
     let fontsReady = !document.fonts;
     let guideAlpha = 0;
+    let drawnFlag = false;
     const kicks = [];
     const press = { x: 0, y: 0, time: 0, index: -1 };
     const pointer = { x: 0, y: 0, inside: false };
@@ -764,258 +766,269 @@ const TechText = ({
 
     const tick = (now) => {
       raf = 0;
-      const s = settingsRef.current;
-      if (!s) return;
-      const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000));
-      last = now;
-      const { ink, accent } = palette(s);
-      const view = ensureLayout(s, ink);
-      const damping = 2 * Math.sqrt(SPRING) * (1 - clamp01(s.bounce) * 0.96);
+      try {
+        const s = settingsRef.current;
+        if (!s) return;
+        const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000));
+        last = now;
+        const { ink, accent } = palette(s);
+        const view = ensureLayout(s, ink);
+        const damping = 2 * Math.sqrt(SPRING) * (1 - clamp01(s.bounce) * 0.96);
 
-      if (s.intro !== introKind) {
-        introKind = s.intro;
-        introClock = 0;
-      }
-      const introOn = introKind !== "none" && !isReduced() && glyphs.length > 0;
-      if (introOn && fontsReady) introClock += dt;
-      const progress = introOn
-        ? clamp01((introClock - INTRO_DELAY) / Math.max(0.3, s.introDuration))
-        : 1;
-      introducing = introOn && progress < 1;
-
-      const sweeping =
-        !introducing &&
-        s.sweep &&
-        !isReduced() &&
-        !pointer.inside &&
-        dragging < 0;
-      if (sweeping) clock += dt * s.speed;
-      pulse += dt;
-      let targetX = pointer.x;
-      let targetY = pointer.y;
-      if (sweeping) {
-        targetX =
-          view.left +
-          (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
-        targetY =
-          view.top +
-          (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
-      }
-      const active =
-        !introducing && (pointer.inside || sweeping || dragging >= 0);
-      if (active && !placed) {
-        lens.x = targetX;
-        lens.y = targetY;
-      }
-      if (active) {
-        const lag = pointer.inside ? 0.05 : 0.22;
-        lens.x = approach(lens.x, targetX, dt, lag);
-        lens.y = approach(lens.y, targetY, dt, lag);
-      }
-      placed = active;
-      presence = approach(
-        presence,
-        s.reveal === "area" && active && dragging < 0 ? 1 : 0,
-        dt,
-        0.16
-      );
-
-      for (let k = kicks.length - 1; k >= 0; k--) {
-        if (kicks[k].at > pulse) continue;
-        const glyph = glyphs[kicks[k].index];
-        if (glyph) glyph.velocity.y -= kicks[k].velocity;
-        kicks.splice(k, 1);
-      }
-
-      let moving = false;
-      glyphs.forEach((glyph, i) => {
-        if (i === dragging) {
-          glyph.offset.x = approach(
-            glyph.offset.x,
-            pointer.x - grab.x,
-            dt,
-            0.03
-          );
-          glyph.offset.y = approach(
-            glyph.offset.y,
-            pointer.y - grab.y,
-            dt,
-            0.03
-          );
-          glyph.velocity.x = 0;
-          glyph.velocity.y = 0;
-          moving = true;
-          return;
+        if (s.intro !== introKind) {
+          introKind = s.intro;
+          introClock = 0;
         }
-        const { offset, velocity } = glyph;
-        if (
-          Math.abs(offset.x) < 0.05 &&
-          Math.abs(offset.y) < 0.05 &&
-          Math.hypot(velocity.x, velocity.y) < 0.5
-        ) {
-          offset.x = 0;
-          offset.y = 0;
-          velocity.x = 0;
-          velocity.y = 0;
-          return;
-        }
-        velocity.x += (-SPRING * offset.x - damping * velocity.x) * dt;
-        velocity.y += (-SPRING * offset.y - damping * velocity.y) * dt;
-        offset.x += velocity.x * dt;
-        offset.y += velocity.y * dt;
-        moving = true;
-      });
+        const introOn =
+          introKind !== "none" && !isReduced() && glyphs.length > 0;
+        if (introOn && fontsReady) introClock += dt;
+        const progress = introOn
+          ? clamp01((introClock - INTRO_DELAY) / Math.max(0.3, s.introDuration))
+          : 1;
+        introducing = introOn && progress < 1;
 
-      let typing = -1;
-      if (introducing && introKind === "type") {
-        const step = 0.86 / glyphs.length;
-        const cursorAt = Math.min(
-          glyphs.length - 1,
-          Math.floor(progress / step)
+        const sweeping =
+          !introducing &&
+          s.sweep &&
+          !isReduced() &&
+          !pointer.inside &&
+          dragging < 0;
+        if (sweeping) clock += dt * s.speed;
+        pulse += dt;
+        let targetX = pointer.x;
+        let targetY = pointer.y;
+        if (sweeping) {
+          targetX =
+            view.left +
+            (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
+          targetY =
+            view.top +
+            (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
+        }
+        const active =
+          !introducing && (pointer.inside || sweeping || dragging >= 0);
+        if (active && !placed) {
+          lens.x = targetX;
+          lens.y = targetY;
+        }
+        if (active) {
+          const lag = pointer.inside ? 0.05 : 0.22;
+          lens.x = approach(lens.x, targetX, dt, lag);
+          lens.y = approach(lens.y, targetY, dt, lag);
+        }
+        placed = active;
+        presence = approach(
+          presence,
+          s.reveal === "area" && active && dragging < 0 ? 1 : 0,
+          dt,
+          0.16
         );
-        typing = progress < 0.93 ? cursorAt : -1;
+
+        for (let k = kicks.length - 1; k >= 0; k--) {
+          if (kicks[k].at > pulse) continue;
+          const glyph = glyphs[kicks[k].index];
+          if (glyph) glyph.velocity.y -= kicks[k].velocity;
+          kicks.splice(k, 1);
+        }
+
+        let moving = false;
         glyphs.forEach((glyph, i) => {
-          glyph.shown =
-            i < cursorAt
-              ? 1
-              : i === cursorAt
-              ? smoothstep(0, step * 0.3, progress - i * step)
-              : 0;
-        });
-      } else {
-        glyphs.forEach((glyph) => {
-          glyph.shown = 1;
-        });
-      }
-
-      const focus = introducing
-        ? typing
-        : dragging >= 0
-        ? dragging
-        : active
-        ? glyphAt(lens.x, lens.y)
-        : -1;
-      if (focus >= 0 && s.selection) {
-        const glyph = glyphs[focus];
-        const bx1 = glyph.box.x1 + glyph.offset.x - 6;
-        const by1 = glyph.box.y1 + glyph.offset.y - 6;
-        const bx2 = glyph.box.x2 + glyph.offset.x + 6;
-        const by2 = glyph.box.y2 + glyph.offset.y + 6;
-        if (frame.index < 0 || frame.alpha < 0.02) {
-          frame.x1 = bx1;
-          frame.y1 = by1;
-          frame.x2 = bx2;
-          frame.y2 = by2;
-        }
-        const glide = focus === dragging ? 0.02 : 0.08;
-        frame.x1 = approach(frame.x1, bx1, dt, glide);
-        frame.y1 = approach(frame.y1, by1, dt, glide);
-        frame.x2 = approach(frame.x2, bx2, dt, glide);
-        frame.y2 = approach(frame.y2, by2, dt, glide);
-        frame.index = focus;
-      }
-      frame.alpha = approach(
-        frame.alpha,
-        focus >= 0 && s.selection ? 1 : 0,
-        dt,
-        0.1
-      );
-
-      glyphs.forEach((glyph, i) => {
-        const target = introducing
-          ? introKind === "type" &&
-            (i === typing || (typing >= 0 && i > typing))
-            ? 1
-            : 0
-          : s.reveal === "letter" && i === focus && i !== dragging
-          ? 1
-          : 0;
-        if (introducing && glyph.shown === 0) glyph.outline = target;
-        glyph.outline = approach(glyph.outline, target, dt, 0.09);
-        if (Math.abs(glyph.outline - target) > 0.002) moving = true;
-        else glyph.outline = target;
-      });
-
-      guideAlpha = approach(
-        guideAlpha,
-        s.guides && !introducing && (focus >= 0 || presence > 0.4) ? 1 : 0,
-        dt,
-        0.14
-      );
-
-      const hovering = !introducing && focus >= 0 && pointer.inside;
-      const nextCursor =
-        dragging >= 0
-          ? "grabbing"
-          : hovering && s.draggable
-          ? "grab"
-          : hovering && s.clickKick
-          ? "pointer"
-          : "";
-      if (nextCursor !== cursor) {
-        cursor = nextCursor;
-        container.style.cursor = nextCursor;
-      }
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.globalCompositeOperation = "source-over";
-      ctx.globalAlpha = 1;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const glyph of glyphs) {
-        const moved = Math.hypot(glyph.offset.x, glyph.offset.y);
-        if (moved > 1) {
-          ctx.globalAlpha = Math.min(1, moved / 24) * 0.55;
-          blit(ctx, glyph.dashes, 0, 0, 0, 0);
-          ctx.globalAlpha = 1;
-        }
-      }
-      if (introducing && introKind === "metrics") {
-        drawLines(s, view, accent, 1 - smoothstep(0.84, 1, progress), (k) =>
-          smoothstep(0.02 + 0.04 * k, 0.2 + 0.04 * k, progress)
-        );
-      } else if (guideAlpha > 0.005) {
-        drawLines(s, view, accent, guideAlpha * 0.6, () => 1);
-      }
-      glyphs.forEach((glyph, i) => {
-        if (introducing && introKind === "assemble") {
-          ensureCells(glyph, view);
-          if (progress < glyph.assembled) {
-            drawAssembling(glyph, progress, accent);
+          if (i === dragging) {
+            glyph.offset.x = approach(
+              glyph.offset.x,
+              pointer.x - grab.x,
+              dt,
+              0.03
+            );
+            glyph.offset.y = approach(
+              glyph.offset.y,
+              pointer.y - grab.y,
+              dt,
+              0.03
+            );
+            glyph.velocity.x = 0;
+            glyph.velocity.y = 0;
+            moving = true;
             return;
+          }
+          const { offset, velocity } = glyph;
+          if (
+            Math.abs(offset.x) < 0.05 &&
+            Math.abs(offset.y) < 0.05 &&
+            Math.hypot(velocity.x, velocity.y) < 0.5
+          ) {
+            offset.x = 0;
+            offset.y = 0;
+            velocity.x = 0;
+            velocity.y = 0;
+            return;
+          }
+          velocity.x += (-SPRING * offset.x - damping * velocity.x) * dt;
+          velocity.y += (-SPRING * offset.y - damping * velocity.y) * dt;
+          offset.x += velocity.x * dt;
+          offset.y += velocity.y * dt;
+          moving = true;
+        });
+
+        let typing = -1;
+        if (introducing && introKind === "type") {
+          const step = 0.86 / glyphs.length;
+          const cursorAt = Math.min(
+            glyphs.length - 1,
+            Math.floor(progress / step)
+          );
+          typing = progress < 0.93 ? cursorAt : -1;
+          glyphs.forEach((glyph, i) => {
+            glyph.shown =
+              i < cursorAt
+                ? 1
+                : i === cursorAt
+                ? smoothstep(0, step * 0.3, progress - i * step)
+                : 0;
+          });
+        } else {
+          glyphs.forEach((glyph) => {
+            glyph.shown = 1;
+          });
+        }
+
+        const focus = introducing
+          ? typing
+          : dragging >= 0
+          ? dragging
+          : active
+          ? glyphAt(lens.x, lens.y)
+          : -1;
+        if (focus >= 0 && s.selection) {
+          const glyph = glyphs[focus];
+          const bx1 = glyph.box.x1 + glyph.offset.x - 6;
+          const by1 = glyph.box.y1 + glyph.offset.y - 6;
+          const bx2 = glyph.box.x2 + glyph.offset.x + 6;
+          const by2 = glyph.box.y2 + glyph.offset.y + 6;
+          if (frame.index < 0 || frame.alpha < 0.02) {
+            frame.x1 = bx1;
+            frame.y1 = by1;
+            frame.x2 = bx2;
+            frame.y2 = by2;
+          }
+          const glide = focus === dragging ? 0.02 : 0.08;
+          frame.x1 = approach(frame.x1, bx1, dt, glide);
+          frame.y1 = approach(frame.y1, by1, dt, glide);
+          frame.x2 = approach(frame.x2, bx2, dt, glide);
+          frame.y2 = approach(frame.y2, by2, dt, glide);
+          frame.index = focus;
+        }
+        frame.alpha = approach(
+          frame.alpha,
+          focus >= 0 && s.selection ? 1 : 0,
+          dt,
+          0.1
+        );
+
+        glyphs.forEach((glyph, i) => {
+          const target = introducing
+            ? introKind === "type" &&
+              (i === typing || (typing >= 0 && i > typing))
+              ? 1
+              : 0
+            : s.reveal === "letter" && i === focus && i !== dragging
+            ? 1
+            : 0;
+          if (introducing && glyph.shown === 0) glyph.outline = target;
+          glyph.outline = approach(glyph.outline, target, dt, 0.09);
+          if (Math.abs(glyph.outline - target) > 0.002) moving = true;
+          else glyph.outline = target;
+        });
+
+        guideAlpha = approach(
+          guideAlpha,
+          s.guides && !introducing && (focus >= 0 || presence > 0.4) ? 1 : 0,
+          dt,
+          0.14
+        );
+
+        const hovering = !introducing && focus >= 0 && pointer.inside;
+        const nextCursor =
+          dragging >= 0
+            ? "grabbing"
+            : hovering && s.draggable
+            ? "grab"
+            : hovering && s.clickKick
+            ? "pointer"
+            : "";
+        if (nextCursor !== cursor) {
+          cursor = nextCursor;
+          container.style.cursor = nextCursor;
+        }
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = 1;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const glyph of glyphs) {
+          const moved = Math.hypot(glyph.offset.x, glyph.offset.y);
+          if (moved > 1) {
+            ctx.globalAlpha = Math.min(1, moved / 24) * 0.55;
+            blit(ctx, glyph.dashes, 0, 0, 0, 0);
+            ctx.globalAlpha = 1;
           }
         }
         if (introducing && introKind === "metrics") {
-          const lead = glyphs.length > 1 ? i / (glyphs.length - 1) : 0;
-          if (progress < 0.72 + 0.28 * lead) {
-            drawFilling(glyph, lead, progress, view);
-            return;
+          drawLines(s, view, accent, 1 - smoothstep(0.84, 1, progress), (k) =>
+            smoothstep(0.02 + 0.04 * k, 0.2 + 0.04 * k, progress)
+          );
+        } else if (guideAlpha > 0.005) {
+          drawLines(s, view, accent, guideAlpha * 0.6, () => 1);
+        }
+        glyphs.forEach((glyph, i) => {
+          if (introducing && introKind === "assemble") {
+            ensureCells(glyph, view);
+            if (progress < glyph.assembled) {
+              drawAssembling(glyph, progress, accent);
+              return;
+            }
           }
-        }
-        if (glyph.shown < 0.001) return;
-        if (glyph.outline < 0.999) {
-          ctx.globalAlpha = (1 - glyph.outline) * glyph.shown;
-          blit(ctx, glyph.fill, glyph.offset.x, glyph.offset.y, 0, 0);
-        }
-        if (glyph.outline > 0.001) {
-          ctx.globalAlpha = glyph.outline * glyph.shown;
-          blit(ctx, glyph.dashes, glyph.offset.x, glyph.offset.y, 0, 0);
-        }
-        ctx.globalAlpha = 1;
-      });
-      if (presence > 0.001) drawReveal(s);
-      drawFrame(s, accent);
+          if (introducing && introKind === "metrics") {
+            const lead = glyphs.length > 1 ? i / (glyphs.length - 1) : 0;
+            if (progress < 0.72 + 0.28 * lead) {
+              drawFilling(glyph, lead, progress, view);
+              return;
+            }
+          }
+          if (glyph.shown < 0.001) return;
+          if (glyph.outline < 0.999) {
+            ctx.globalAlpha = (1 - glyph.outline) * glyph.shown;
+            blit(ctx, glyph.fill, glyph.offset.x, glyph.offset.y, 0, 0);
+          }
+          if (glyph.outline > 0.001) {
+            ctx.globalAlpha = glyph.outline * glyph.shown;
+            blit(ctx, glyph.dashes, glyph.offset.x, glyph.offset.y, 0, 0);
+          }
+          ctx.globalAlpha = 1;
+        });
+        if (presence > 0.001) drawReveal(s);
+        drawFrame(s, accent);
 
-      const settling =
-        moving ||
-        introducing ||
-        kicks.length > 0 ||
-        (guideAlpha > 0.005 && guideAlpha < 0.995) ||
-        Math.abs(
-          presence - (s.reveal === "area" && active && dragging < 0 ? 1 : 0)
-        ) > 0.002 ||
-        (frame.alpha > 0.01 && frame.alpha < 0.99);
-      if ((active || settling) && visible && alive)
-        raf = requestAnimationFrame(tick);
+        if (!drawnFlag && glyphs.length > 0) {
+          drawnFlag = true;
+          setDrawn(true);
+        }
+
+        const settling =
+          moving ||
+          introducing ||
+          kicks.length > 0 ||
+          (guideAlpha > 0.005 && guideAlpha < 0.995) ||
+          Math.abs(
+            presence - (s.reveal === "area" && active && dragging < 0 ? 1 : 0)
+          ) > 0.002 ||
+          (frame.alpha > 0.01 && frame.alpha < 0.99);
+        if ((active || settling) && visible && alive)
+          raf = requestAnimationFrame(tick);
+      } catch (error) {
+        console.error("TechText error:", error);
+        setDrawn(false); // fallback text stays visible
+      }
     };
 
     const wake = () => {
@@ -1129,6 +1142,7 @@ const TechText = ({
     const schemeQuery = window.matchMedia?.("(prefers-color-scheme: dark)");
     schemeQuery?.addEventListener?.("change", wake);
     if (document.fonts) document.fonts.ready.then(fontsLoaded, fontsLoaded);
+    const fontTimeout = setTimeout(fontsLoaded, 1500); // failsafe
 
     resize();
 
@@ -1147,20 +1161,41 @@ const TechText = ({
       container.removeEventListener("pointerup", onUp);
       container.removeEventListener("pointercancel", onUp);
       container.removeEventListener("pointerleave", onLeave);
+      clearTimeout(fontTimeout);
     };
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className={`relative h-20 w-full touch-pan-y select-none text-left sm:h-28 md:h-32 lg:h-36 ${className}`.trim()}
+      className={`relative h-20 w-full ... ${className}`.trim()}
       style={style}
       role="img"
       aria-label={text}
     >
+      {!drawn && (
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center font-semibold tracking-tight"
+          style={{ color, fontSize: "clamp(1.75rem, 9vw, 3.5rem)" }}
+        >
+          {text}
+        </span>
+      )}
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>
   );
+  // return (
+  //   <div
+  //     ref={containerRef}
+  //     className={`relative h-20 w-full touch-pan-y select-none text-left sm:h-28 md:h-32 lg:h-36 ${className}`.trim()}
+  //     style={style}
+  //     role="img"
+  //     aria-label={text}
+  //   >
+  //     <canvas ref={canvasRef} className="block h-full w-full" />
+  //   </div>
+  // );
 };
 
 export default TechText;
