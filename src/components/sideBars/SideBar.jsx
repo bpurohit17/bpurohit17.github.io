@@ -24,7 +24,7 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/",
+    url: "https://www.linkedin.com/in/bpurohit17",
     Icon: Linkedin,
   },
   {
@@ -159,15 +159,6 @@ const SideBars = () => {
                 </button>
               );
             })}
-
-            {/* Contact CTA */}
-            <button
-              type="button"
-              onClick={() => handleNavigation("contact")}
-              className="rounded-xl border border-purple-400/40 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-200 transition-all duration-200 hover:border-purple-400/70 hover:bg-purple-500/20 hover:text-white"
-            >
-              Let's talk
-            </button>
           </nav>
 
           {/* Mobile menu toggle */}
