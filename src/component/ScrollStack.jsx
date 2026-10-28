@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 const resolveOffset = (value, size) => {
   if (typeof value === "number") return value;
@@ -619,6 +620,32 @@ const ScrollStack = ({
 
     observeCards();
 
+    // When the stack scrolls out of view (e.g. navbar jump), drop any glide
+    // state and rewind to card 1 so it can't trap the wheel on re-entry.
+    let visibility;
+    if (!windowed) {
+      visibility = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) return;
+
+          cancelAnimationFrame(glide);
+          window.clearTimeout(rest);
+          glide = 0;
+          gliding = false;
+
+          if (root.scrollTop !== 0) {
+            root.scrollTop = 0;
+            written = 0;
+            current = 0;
+            goal = 0;
+            schedule();
+          }
+        },
+        { threshold: 0 }
+      );
+      visibility.observe(root);
+    }
+
     target.addEventListener("scroll", onScroll, {
       passive: true,
     });
@@ -648,11 +675,13 @@ const ScrollStack = ({
     schedule();
 
     return () => {
+      // cleanup
       cancelAnimationFrame(frame);
       cancelAnimationFrame(glide);
       window.clearTimeout(rest);
 
       observer.disconnect();
+      visibility?.disconnect();
 
       target.removeEventListener("scroll", onScroll);
       target.removeEventListener("wheel", onWheel);
@@ -698,7 +727,7 @@ const ScrollStack = ({
                 zIndex: index + 1,
               }}
             >
-              {child}
+              {isMobile ? <ScrollReveal>{child}</ScrollReveal> : child}
             </div>
           </Fragment>
         ))}

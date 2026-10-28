@@ -3,6 +3,7 @@ import ProjectItem from "./projectItem";
 import { useInView } from "react-intersection-observer";
 import Lightfall from "../../component/Lightfall.jsx";
 import ScrollReveal from "../../component/ScrollReveal.jsx";
+import AnimatedText, { RevealLine } from "../../component/AnimatedText.jsx";
 import FlexCarousel from "../../component/FlexCarousel.jsx";
 import ScrollStack, { ScrollStackItem } from "../../component/ScrollStack.jsx";
 
@@ -232,38 +233,45 @@ const Projects = ({ setColor }) => {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* Section heading */}
         <div className="text-center">
-          <p className="mt-16 mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-purple-300">
-            My Portfolio
-          </p>
-          <h2 className="text-3xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-            Things I've Worked On,
-            <span className="mt-2 block text-purple-300">Some of Them</span>
+          <AnimatedText
+            as="p"
+            text="My Portfolio"
+            stagger={0.12}
+            className="mt-16 mb-4 text-[11px] md:text-sm font-medium md:font-semibold uppercase tracking-[0.3em] text-purple-300"
+          />
+
+          <h2 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+            <AnimatedText
+              as="span"
+              text="Things I've Worked On,"
+              className="block"
+              delay={0.1}
+            />
+            <AnimatedText
+              as="span"
+              text="Some of Them"
+              shimmer
+              delay={0.45}
+              className="mt-2 block"
+            />
           </h2>
-          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-purple-400" />
-          <p
-            className="mx-auto max-w-[340px] xs:max-w-full md:max-w-2xl lg:max-w-3xl xl:max-w-4xl
-            px-2 sm:px-4 text-center text-sm leading-6 sm:leading-7 xl:leading-8 text-white/70
-            xs:text-base md:text-lg lg:text-lg xl:text-xl mt-4 xs:mt-5 sm:mt-6 lg:mt-7"
-          >
-            From pixels to prototypes, the skills behind every detail.
-            <br className="hidden sm:block" /> A mix of creative thinking,
-            problem-solving, and hands-on craft, developed through
-            experimentation and shaped by real-world projects.
-          </p>
-          {/* <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-            From pixels to prototypes, the skills behind every detail.
-            <br /> A mix of creative thinking, problem-solving, and hands-on
-            craft, developed through experimentation and shaped by real-world
-            projects.
-          </p> */}
+
+          <RevealLine className="mx-auto mt-6 h-1 w-24 rounded-full bg-purple-400" />
+
+          <AnimatedText
+            as="p"
+            text="From pixels to prototypes, the skills behind every detail. A mix of creative thinking, problem-solving, and hands-on craft, developed through experimentation and shaped by real-world projects."
+            stagger={0.025}
+            duration={0.7}
+            delay={0.6}
+            className="mx-auto max-w-[340px] xs:max-w-full md:max-w-2xl lg:max-w-3xl xl:max-w-4xl px-2 sm:px-4 text-center text-sm leading-6 sm:leading-7 xl:leading-8 text-white/70 xs:text-base md:text-lg xl:text-xl mt-4 xs:mt-5 sm:mt-6 lg:mt-7"
+          />
         </div>
         <div className="mt-4 md:mt-6 lg:mt-10 h-auto w-full md:h-[850px]">
           <ScrollStack>
             {projects.map((project) => (
-              <ScrollStackItem>
-                <div key={project.title} className="">
-                  <ProjectItem {...project} />
-                </div>
+              <ScrollStackItem key={project.title}>
+                <ProjectItem {...project} />
               </ScrollStackItem>
             ))}
           </ScrollStack>

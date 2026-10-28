@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import FolderFloat from "../../component/FolderFloat";
+import ScrollReveal from "../../component/ScrollReveal";
+import AnimatedText, { RevealLine } from "../../component/AnimatedText";
 
 const Skills = ({ setColor }) => {
   const { ref } = useInView({ threshold: 0.5 });
@@ -58,70 +60,88 @@ const Skills = ({ setColor }) => {
         {/* Heading */}
         <div className="flex w-full flex-col items-center">
           <h2 className="m-0 text-center text-[28px] font-bold leading-tight text-[#eeeeee] sm:text-4xl lg:text-[44px]">
-            Tech Stack &amp; Tools
+            <AnimatedText text="Tech Stack &" />{" "}
+            <AnimatedText text="Tools" shimmer delay={0.25} />
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-6 text-white/70 sm:mt-6 sm:text-base sm:leading-7 lg:text-lg">
-            The skills I bring to the table and the tools I use to turn ideas
-            into working experiences.
-          </p>
+          <RevealLine
+            className="mt-4 h-1 w-20 rounded-full bg-purple-400"
+            delay={0.5}
+          />
+
+          <AnimatedText
+            as="p"
+            text="The skills I bring to the table and the tools I use to turn ideas into working experiences."
+            stagger={0.03}
+            duration={0.7}
+            delay={0.5}
+            className="mx-auto mt-5 max-w-2xl text-center text-sm leading-6 text-white/70 sm:mt-6 sm:text-base sm:leading-7 lg:text-lg"
+          />
         </div>
 
         {/* Responsive folder grid */}
         <div className="w-full overflow-visible px-0 pb-16 pt-16 sm:px-2 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-14">
           <div className="grid w-full grid-cols-1 justify-items-center gap-x-6 gap-y-48 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-36 lg:gap-x-12 xl:grid-cols-4 xl:gap-x-6">
-            <FolderFloat
-              {...folderProps}
-              trigger="hover"
-              items={[
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "React JS",
-                "Tailwind CSS",
-              ]}
-              label="Frontend Development"
-              sublabel="5 skills"
-            />
+            <ScrollReveal>
+              <FolderFloat
+                {...folderProps}
+                trigger="hover"
+                items={[
+                  "HTML5",
+                  "CSS3",
+                  "JavaScript",
+                  "React JS",
+                  "Tailwind CSS",
+                ]}
+                label="Frontend Development"
+                sublabel="5 skills"
+              />
+            </ScrollReveal>
 
-            <FolderFloat
-              {...folderProps}
-              trigger="hover"
-              items={["Flutter", "Dart"]}
-              label="Mobile Development"
-              sublabel="2 skills"
-            />
+            <ScrollReveal>
+              <FolderFloat
+                {...folderProps}
+                trigger="hover"
+                items={["Flutter", "Dart"]}
+                label="Mobile Development"
+                sublabel="2 skills"
+              />
+            </ScrollReveal>
 
-            <FolderFloat
-              {...folderProps}
-              trigger="hover"
-              items={[
-                "SQL Server",
-                "MySQL",
-                "Firebase",
-                "SupaBase",
-                "Java Spring Boot",
-                "ASP.NET",
-              ]}
-              label="Database & Backend"
-              sublabel="6 skills"
-            />
+            <ScrollReveal>
+              <FolderFloat
+                {...folderProps}
+                trigger="hover"
+                items={[
+                  "SQL Server",
+                  "MySQL",
+                  "Firebase",
+                  "SupaBase",
+                  "Java Spring Boot",
+                  "ASP.NET",
+                ]}
+                label="Database & Backend"
+                sublabel="6 skills"
+              />
+            </ScrollReveal>
 
-            <FolderFloat
-              {...folderProps}
-              trigger="hover"
-              items={[
-                "Git",
-                "GitHub",
-                "AWS",
-                "CI/CD",
-                "Postman",
-                "Figma",
-                "Notion",
-              ]}
-              label="Tools & Workflow"
-              sublabel="7 tools"
-            />
+            <ScrollReveal>
+              <FolderFloat
+                {...folderProps}
+                trigger="hover"
+                items={[
+                  "Git",
+                  "GitHub",
+                  "AWS",
+                  "CI/CD",
+                  "Postman",
+                  "Figma",
+                  "Notion",
+                ]}
+                label="Tools & Workflow"
+                sublabel="7 tools"
+              />
+            </ScrollReveal>
           </div>
         </div>
       </div>
